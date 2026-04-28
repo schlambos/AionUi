@@ -294,6 +294,15 @@
   .conv-item.active { background: var(--bg-active); color: var(--text-primary); }
   .new-message-row { padding: 10px 20px; font-size: 13px; }
   .new-message-row.active { background: var(--accent-light); color: var(--accent); }
+  .panel-search {
+    display: flex; align-items: center; gap: 8px;
+    margin: 6px 16px; padding: 6px 10px;
+    background: var(--bg-hover); border-radius: 8px;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .panel-search:hover { background: var(--bg-active); }
+  .panel-search-icon { font-size: 12px; color: var(--text-muted); }
+  .panel-search-text { font-size: 12px; color: var(--text-muted); }
   .conv-item .c-dot {
     width: 6px; height: 6px; border-radius: 50%; background: var(--border);
     flex-shrink: 0;
@@ -1638,14 +1647,16 @@
       <!-- ============ CHAT PANEL ============ -->
       <div id="panel-chat" class="sidebar-panel">
 
-        <div class="tab-toolbar">
-          <div class="tb-search" title="搜索会话">🔍</div>
-        </div>
-
         <!-- 新消息（固定行，点击回首页） -->
         <div class="conv-item new-message-row" onclick="selectNewMessage()">
           <span style="font-size:15px; margin-right:6px;">✏️</span>
           <span class="c-label" style="font-weight:600;">新消息</span>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="panel-search">
+          <span class="panel-search-icon">🔍</span>
+          <span class="panel-search-text">搜索</span>
         </div>
 
         <div class="sidebar-divider"></div>
@@ -1743,14 +1754,16 @@
       <!-- ============ PEOPLE PANEL ============ -->
       <div id="panel-people" class="sidebar-panel active">
 
-        <div class="tab-toolbar">
-          <div class="tb-search" title="搜索助手和团队">🔍</div>
-        </div>
-
         <!-- 新消息（固定行，点击回首页） -->
         <div class="conv-item new-message-row active" onclick="selectNewMessage()">
           <span style="font-size:15px; margin-right:6px;">✏️</span>
           <span class="c-label" style="font-weight:600;">新消息</span>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="panel-search">
+          <span class="panel-search-icon">🔍</span>
+          <span class="panel-search-text">搜索</span>
         </div>
 
         <div class="sidebar-divider"></div>
