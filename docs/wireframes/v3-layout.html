@@ -83,7 +83,11 @@
     background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
     display: flex; align-items: center; justify-content: center;
     box-shadow: var(--shadow-sm); cursor: pointer; margin: 8px 0 6px;
-    -webkit-app-region: no-drag;
+    -webkit-app-region: no-drag; transition: all .2s;
+  }
+  .icon-rail .rail-logo:hover {
+    background: linear-gradient(135deg, var(--accent) 0%, #388E3C 100%);
+    box-shadow: 0 2px 8px rgba(76,175,80,.3);
   }
   .icon-rail .rail-logo svg { width: 20px; height: 20px; }
   .icon-rail .rail-nav {
@@ -91,10 +95,13 @@
     padding: 8px 0; flex: 0 0 auto; width: 100%;
   }
   .icon-rail .rail-btn {
-    width: 40px; height: 40px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--text-tertiary); transition: all var(--transition);
+    width: 48px; height: 44px; border-radius: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1px; cursor: pointer; color: var(--text-tertiary); transition: all var(--transition);
     position: relative; font-size: 18px;
+  }
+  .icon-rail .rail-btn .rail-label {
+    font-size: 9px; font-weight: 500; line-height: 1; letter-spacing: -.2px;
   }
   .icon-rail .rail-btn:hover { background: var(--bg-hover); color: var(--text-secondary); }
   .icon-rail .rail-btn.active { background: var(--accent-light); color: var(--accent); }
@@ -292,12 +299,6 @@
   }
   .conv-item .c-actions .act-btn:hover { background: rgba(0,0,0,.06); color: var(--text-secondary); }
   .conv-item.active { background: var(--bg-active); color: var(--text-primary); }
-  .new-message-row {
-    margin: 8px 16px 0; padding: 6px 10px; font-size: 13px;
-    border-radius: 8px; background: var(--bg-hover);
-  }
-  .new-message-row:hover { background: var(--bg-active); }
-  .new-message-row.active { background: var(--accent-light); color: var(--accent); }
   .panel-search {
     display: flex; align-items: center; gap: 8px;
     margin: 6px 16px; padding: 6px 10px;
@@ -379,29 +380,7 @@
     flex: 1; display: flex; flex-direction: column;
     background: var(--bg-main); overflow: hidden; height: 100%;
   }
-  .home {
-    flex: 1; display: flex; flex-direction: column; align-items: center;
-    padding: 0 24px; overflow-y: auto;
-  }
-
-  /* === Secretary zone (AionCLI) === */
-  .home-secretary {
-    width: 100%; max-width: 680px; display: flex; flex-direction: column;
-    align-items: center; padding-top: 60px; padding-bottom: 8px;
-  }
-  .home-avatar {
-    width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
-    box-shadow: 0 4px 20px rgba(76,175,80,.15); margin-bottom: 16px;
-    border: 2.5px solid var(--accent);
-  }
-  .home-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .home-greeting {
-    font-size: 22px; font-weight: 700; color: var(--text-primary);
-    margin-bottom: 4px; text-align: center;
-  }
-  .home-subtitle {
-    font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-align: center;
-  }
+  /* (home view removed — AionCLI landing page is the default) */
 
   /* Input */
   .input-area {
@@ -451,83 +430,7 @@
     border-radius: 4px; padding: 2px 5px; font-weight: 700; letter-spacing: .3px;
   }
 
-  /* === Staff zone (employees) === */
-  .home-staff {
-    width: 100%; max-width: 680px; padding-top: 36px; padding-bottom: 48px;
-  }
-  .home-staff-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .home-staff-title {
-    font-size: 14px; font-weight: 600; color: var(--text-secondary);
-  }
-  .home-staff-more {
-    font-size: 12px; color: var(--text-muted); cursor: pointer;
-    transition: color var(--transition);
-  }
-  .home-staff-more:hover { color: var(--accent); }
-  .staff-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  }
-  .staff-card {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    padding: 18px 10px 14px; background: #fff; border: 1px solid var(--border-light);
-    border-radius: 14px; cursor: pointer; transition: all .2s;
-    position: relative;
-  }
-  .staff-card:hover {
-    border-color: var(--accent); background: var(--accent-light);
-    box-shadow: 0 4px 16px rgba(76,175,80,.1); transform: translateY(-2px);
-  }
-  .staff-card .staff-avatar {
-    width: 48px; height: 48px; border-radius: 50%; overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08); flex-shrink: 0;
-  }
-  .staff-card .staff-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
-  .staff-card .staff-avatar.cli {
-    background: #f5f5f5; padding: 8px; box-sizing: border-box;
-  }
-  .staff-card .staff-avatar.cli img { border-radius: 0; object-fit: contain; }
-  .staff-card .staff-name {
-    font-size: 12px; font-weight: 600; color: var(--text-primary);
-    text-align: center; line-height: 1.3;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .staff-card .staff-desc {
-    font-size: 11px; color: var(--text-muted); text-align: center;
-    line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical; overflow: hidden;
-  }
-  .staff-card.staff-add {
-    border-style: dashed; border-color: var(--border);
-  }
-  .staff-card.staff-add:hover {
-    border-color: var(--accent); border-style: dashed;
-  }
-  .staff-card.staff-add .staff-avatar {
-    background: var(--bg-body); display: flex; align-items: center; justify-content: center;
-    font-size: 22px; color: var(--text-muted); box-shadow: none;
-  }
-  .staff-card .staff-badge {
-    position: absolute; top: 8px; right: 8px;
-    min-width: 18px; height: 18px; padding: 0 5px;
-    border-radius: 9px; background: #f44336; color: #fff;
-    font-size: 10px; font-weight: 700; line-height: 18px;
-    text-align: center; box-sizing: border-box;
-  }
-  .staff-card .staff-avatar-group {
-    width: 48px; height: 48px; position: relative; flex-shrink: 0;
-  }
-  .staff-card .staff-avatar-group .sag-back,
-  .staff-card .staff-avatar-group .sag-front {
-    width: 34px; height: 34px; border-radius: 50%; overflow: hidden;
-    position: absolute; box-shadow: 0 0 0 2px #fff;
-  }
-  .staff-card .staff-avatar-group .sag-back { top: 0; left: 0; }
-  .staff-card .staff-avatar-group .sag-front { bottom: 0; right: 0; z-index: 1; }
-  .staff-card .staff-avatar-group img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+  /* (staff card CSS removed — "有人找你" section removed) */
   /* (old tab-toolbar CSS removed — now defined in sidebar panel section) */
   .add-btn {
     width: 22px; height: 22px; border-radius: 6px; cursor: pointer;
@@ -540,8 +443,224 @@
   /* === Chat Conversation View === */
   .chat-view { display: none; flex-direction: row; height: 100%; flex: 1; }
   .chat-view.active { display: flex; }
-  .home { display: none !important; }
-  .home.active { display: flex !important; }
+  /* (home view display toggles removed) */
+
+  /* === Assistant Landing (new conversation for specific assistant) === */
+  .assistant-landing { display: none !important; }
+  .assistant-landing.active { display: flex !important; }
+  .assistant-landing {
+    flex: 1; flex-direction: column; align-items: center;
+    padding: 0 24px; overflow-y: auto;
+  }
+  .al-hero {
+    width: 100%; max-width: 680px; display: flex; flex-direction: column;
+    align-items: center; padding-top: 80px; padding-bottom: 8px;
+  }
+  .al-avatar {
+    width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
+    margin-bottom: 16px; background: var(--bg-hover);
+  }
+  .al-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .al-avatar.cli-logo { background: #f0f0f0; padding: 14px; }
+  .al-avatar.cli-logo img { object-fit: contain; }
+  .al-name {
+    font-size: 22px; font-weight: 700; color: var(--text-primary);
+    margin-bottom: 4px; text-align: center;
+  }
+  .al-desc {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-align: center;
+    max-width: 420px;
+  }
+  .al-prompts {
+    width: 100%; max-width: 680px; display: flex; flex-wrap: wrap;
+    gap: 8px; justify-content: center; margin-top: 4px;
+  }
+  .al-prompts .al-chip {
+    font-size: 12px; color: var(--text-tertiary); padding: 5px 12px;
+    border: 1px solid var(--border); border-radius: 16px; cursor: pointer;
+    transition: all var(--transition);
+  }
+  .al-prompts .al-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Recent conversations in landing page */
+  .landing-convs {
+    width: 100%; max-width: 680px; margin-top: 32px; padding-bottom: 48px;
+  }
+  .landing-convs-title {
+    font-size: 12px; font-weight: 600; color: var(--text-muted);
+    margin-bottom: 8px; padding-left: 4px;
+  }
+  .landing-conv-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 8px; cursor: pointer;
+    transition: all var(--transition); font-size: 13px; color: var(--text-secondary);
+  }
+  .landing-conv-item:hover { background: var(--bg-hover); }
+  .landing-conv-item.unread .landing-conv-name { font-weight: 600; color: var(--text-primary); }
+  .landing-conv-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .landing-conv-ws { font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+
+  /* === Team Landing (new conversation for specific team) === */
+  .team-landing { display: none !important; }
+  .team-landing.active { display: flex !important; }
+  .team-landing {
+    flex: 1; flex-direction: column; align-items: center;
+    padding: 0 24px; overflow-y: auto;
+  }
+  .tl-hero {
+    width: 100%; max-width: 680px; display: flex; flex-direction: column;
+    align-items: center; padding-top: 80px; padding-bottom: 8px;
+  }
+  .tl-avatars {
+    display: flex; align-items: center; margin-bottom: 16px;
+  }
+  .tl-avatars .tl-av {
+    width: 48px; height: 48px; border-radius: 50%; overflow: hidden;
+    border: 2.5px solid #fff; background: var(--bg-hover);
+  }
+  .tl-avatars .tl-av:not(:first-child) { margin-left: -16px; }
+  .tl-avatars .tl-av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tl-name {
+    font-size: 22px; font-weight: 700; color: var(--text-primary);
+    margin-bottom: 4px; text-align: center;
+  }
+  .tl-members {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-align: center;
+  }
+
+  /* === Cron Detail View === */
+  .cron-detail { display: none !important; }
+  .cron-detail.active { display: flex !important; }
+  .cron-detail {
+    flex: 1; flex-direction: column; overflow-y: auto; background: var(--bg-main);
+  }
+  .cron-detail .cd-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.6); backdrop-filter: blur(12px); flex-shrink: 0;
+  }
+  .cron-detail .cd-header .cd-back {
+    width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-tertiary); transition: all var(--transition);
+  }
+  .cron-detail .cd-header .cd-back:hover { background: var(--bg-hover); color: var(--text-secondary); }
+  .cron-detail .cd-header .cd-title { font-size: 14px; font-weight: 600; color: var(--text-primary); flex: 1; }
+  .cron-detail .cd-header .cd-status {
+    font-size: 11px; padding: 3px 10px; border-radius: 10px; font-weight: 600;
+  }
+  .cron-detail .cd-header .cd-status.active { background: var(--accent-light); color: var(--accent); }
+  .cron-detail .cd-header .cd-status.paused { background: #f5f5f5; color: var(--text-muted); }
+  .cron-detail .cd-body { padding: 24px; max-width: 720px; }
+  .cron-detail .cd-section { margin-bottom: 28px; }
+  .cron-detail .cd-section-title {
+    font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: .5px; margin-bottom: 12px;
+  }
+  .cron-detail .cd-info-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .cron-detail .cd-info-card {
+    background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+  .cron-detail .cd-info-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .cron-detail .cd-info-value { font-size: 13px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+  .cron-detail .cd-info-value img { width: 18px; height: 18px; border-radius: 50%; }
+  .cron-detail .cd-info-value .cli-icon { background: #f5f5f5; padding: 3px; }
+  .cron-detail .cd-prompt-box {
+    background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 14px 16px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .cron-detail .cd-conv-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: var(--radius-sm); cursor: pointer;
+    transition: all var(--transition); background: #fff;
+    border: 1px solid var(--border-light); margin-bottom: 8px;
+  }
+  .cron-detail .cd-conv-item:hover { border-color: var(--accent); background: var(--accent-light); }
+  .cron-detail .cd-conv-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .cron-detail .cd-conv-time { font-size: 11px; color: var(--text-muted); }
+  .cron-detail .cd-conv-status { font-size: 11px; font-weight: 500; }
+  .cron-detail .cd-conv-status.success { color: var(--accent); }
+  .cron-detail .cd-conv-status.fail { color: #C62828; }
+  .cron-detail .cd-actions {
+    display: flex; gap: 10px; padding-top: 8px;
+  }
+  .cron-detail .cd-btn {
+    padding: 8px 20px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all var(--transition); border: 1px solid var(--border);
+    background: #fff; color: var(--text-secondary);
+  }
+  .cron-detail .cd-btn:hover { background: var(--bg-hover); }
+  .cron-detail .cd-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .cron-detail .cd-btn.primary:hover { opacity: .9; }
+  .cron-detail .cd-btn.danger { color: #C62828; border-color: #FFCDD2; }
+  .cron-detail .cd-btn.danger:hover { background: #FFEBEE; }
+
+  /* === Settings Page View === */
+  .settings-page { display: none !important; }
+  .settings-page.active { display: flex !important; }
+  .settings-page {
+    flex: 1; flex-direction: column; overflow-y: auto; background: var(--bg-main);
+  }
+  .settings-page .sp-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.6); backdrop-filter: blur(12px); flex-shrink: 0;
+  }
+  .settings-page .sp-title { font-size: 14px; font-weight: 600; color: var(--text-primary); flex: 1; }
+  .settings-page .sp-body { padding: 24px; max-width: 720px; }
+  .settings-page .sp-section { margin-bottom: 28px; }
+  .settings-page .sp-section-title {
+    font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: .5px; margin-bottom: 12px;
+  }
+  .settings-page .sp-card {
+    background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 16px 20px; margin-bottom: 12px;
+  }
+  .settings-page .sp-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; border-bottom: 1px solid var(--border-light);
+  }
+  .settings-page .sp-row:last-child { border-bottom: none; }
+  .settings-page .sp-row-label { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .settings-page .sp-row-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .settings-page .sp-row-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .settings-page .sp-toggle {
+    width: 36px; height: 20px; border-radius: 10px; background: #ddd;
+    position: relative; cursor: pointer; transition: background .2s;
+  }
+  .settings-page .sp-toggle.on { background: var(--accent); }
+  .settings-page .sp-toggle::after {
+    content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%;
+    background: #fff; top: 2px; left: 2px; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  }
+  .settings-page .sp-toggle.on::after { transform: translateX(16px); }
+  .settings-page .sp-select {
+    padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+    font-size: 12px; color: var(--text-secondary); background: #fff; cursor: pointer;
+  }
+  .settings-page .sp-value { font-size: 12px; color: var(--text-tertiary); }
+  .settings-page .sp-btn {
+    padding: 6px 16px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all var(--transition); border: 1px solid var(--border);
+    background: #fff; color: var(--text-secondary);
+  }
+  .settings-page .sp-btn:hover { background: var(--bg-hover); }
+  .settings-page .sp-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .settings-page .sp-qr-area {
+    display: flex; align-items: center; gap: 20px; padding: 16px 0;
+  }
+  .settings-page .sp-qr {
+    width: 120px; height: 120px; border-radius: var(--radius-md); border: 1px solid var(--border-light);
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 48px; color: var(--text-muted);
+  }
+  .settings-page .sp-qr-info { flex: 1; }
+  .settings-page .sp-qr-info .sp-url { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .settings-page .sp-qr-info .sp-url-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
   .chat-main { flex: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
 
   .chat-header {
@@ -660,6 +779,83 @@
   }
   .members-popup .mp-manage { font-size: 12px; color: var(--accent); font-weight: 600; cursor: pointer; }
   .members-popup .mp-manage:hover { text-decoration: underline; }
+
+  /* === Chat / Tasks tab bar === */
+  .chat-tabs {
+    display: flex; align-items: center; gap: 0;
+    padding: 0 24px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    background: #fff;
+  }
+  .chat-tab {
+    display: flex; align-items: center; gap: 5px;
+    padding: 10px 16px; font-size: 12px; font-weight: 600;
+    color: var(--text-tertiary); cursor: pointer;
+    border-bottom: 2px solid transparent; transition: all var(--transition);
+    margin-bottom: -1px;
+  }
+  .chat-tab:hover { color: var(--text-secondary); }
+  .chat-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .chat-tab .tab-icon { font-size: 13px; }
+
+  /* === Tasks kanban board === */
+  .tasks-board {
+    flex: 1; overflow-x: auto; overflow-y: hidden;
+    padding: 20px 24px; display: none;
+    gap: 16px; background: var(--bg-main);
+  }
+  .tasks-board.active { display: flex; }
+  .task-column {
+    min-width: 220px; width: 220px; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .task-col-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 4px 8px; font-size: 12px; font-weight: 600; color: var(--text-secondary);
+  }
+  .task-col-header .col-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .task-col-header .col-count {
+    font-weight: 400; color: var(--text-muted); margin-left: auto;
+  }
+  .task-col-header .col-add {
+    width: 20px; height: 20px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-muted); font-size: 14px;
+    transition: all var(--transition);
+  }
+  .task-col-header .col-add:hover { background: var(--bg-hover); color: var(--text-secondary); }
+  .task-col-body {
+    flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+  }
+  .task-card {
+    background: #fff; border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 12px; cursor: pointer;
+    transition: all .15s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .task-card:hover { border-color: var(--border); box-shadow: var(--shadow-sm); }
+  .task-card .tc-id { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+  .task-card .tc-title { font-size: 13px; font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+  .task-card .tc-desc { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .task-card .tc-footer { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .task-card .tc-assignee {
+    width: 20px; height: 20px; border-radius: 50%; overflow: hidden;
+    flex-shrink: 0; margin-left: auto; box-shadow: 0 0 0 1px var(--border-light);
+  }
+  .task-card .tc-assignee img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+  .task-card .tc-assignee.cli { background: #f5f5f5; padding: 3px; }
+  .task-card .tc-assignee.cli img { border-radius: 0; object-fit: contain; }
+  .task-card .tc-priority {
+    font-size: 10px; font-weight: 600; padding: 2px 8px;
+    border-radius: 4px; display: flex; align-items: center; gap: 3px;
+  }
+  .tc-priority.low { background: #E8F5E9; color: #388E3C; }
+  .tc-priority.medium { background: #FFF3E0; color: #E65100; }
+  .tc-priority.high { background: #FFEBEE; color: #C62828; }
+  .task-col-empty {
+    font-size: 12px; color: var(--text-muted); text-align: center;
+    padding: 32px 0;
+  }
 
   .chat-messages {
     flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px;
@@ -1601,7 +1797,7 @@
   <!-- ===== Icon Rail ===== -->
   <div class="icon-rail">
     <div class="rail-topbar">
-      <div class="rail-logo" onclick="selectNewMessage()" title="AionUi · 回到首页">
+      <div class="rail-logo" onclick="selectNewMessage()" title="AionCLI">
         <svg viewBox="0 0 80 80" fill="none">
           <path d="M40 20 Q38 22 25 40 Q23 42 26 42 L30 42 Q32 40 40 30 Q48 40 50 42 L54 42 Q57 42 55 40 Q42 22 40 20" fill="white"/>
           <circle cx="40" cy="46" r="3" fill="white"/>
@@ -1613,16 +1809,19 @@
     <div class="rail-nav">
       <!-- 👥 通讯录 -->
       <div class="rail-btn active" onclick="switchRail('people')" title="通讯录">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="rail-label">通讯录</span>
       </div>
       <!-- 💬 工作区 -->
       <div class="rail-btn" onclick="switchRail('chat')" title="工作区">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="rail-label">工作区</span>
         <span class="rail-badge">8</span>
       </div>
       <!-- ⏰ 定时任务 -->
       <div class="rail-btn" onclick="switchRail('cron')" title="定时任务">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="rail-label">定时</span>
         <span class="rail-dot"></span>
       </div>
     </div>
@@ -1632,7 +1831,8 @@
     <div class="rail-bottom">
       <!-- ⚙️ 设置 -->
       <div class="rail-btn" onclick="switchRail('settings')" title="设置">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span class="rail-label">设置</span>
       </div>
       <!-- 👤 用户 -->
       <div class="rail-avatar" onclick="showUserMenu(this)" title="VeryLiu · Pro Plan">👤</div>
@@ -1650,12 +1850,6 @@
 
       <!-- ============ CHAT PANEL ============ -->
       <div id="panel-chat" class="sidebar-panel">
-
-        <!-- 新消息（固定行，点击回首页） -->
-        <div class="conv-item new-message-row" onclick="selectNewMessage()">
-          <span style="font-size:15px; margin-right:6px;">✏️</span>
-          <span class="c-label" style="font-weight:600;">新消息</span>
-        </div>
 
         <!-- 搜索栏 -->
         <div class="panel-search">
@@ -1758,12 +1952,6 @@
       <!-- ============ PEOPLE PANEL ============ -->
       <div id="panel-people" class="sidebar-panel active">
 
-        <!-- 新消息（固定行，点击回首页） -->
-        <div class="conv-item new-message-row active" onclick="selectNewMessage()">
-          <span style="font-size:15px; margin-right:6px;">✏️</span>
-          <span class="c-label" style="font-weight:600;">新消息</span>
-        </div>
-
         <!-- 搜索栏 -->
         <div class="panel-search">
           <span class="panel-search-icon">🔍</span>
@@ -1774,7 +1962,7 @@
         <div class="section-label">助手 <span class="section-add" onclick="event.stopPropagation(); openCreateAssistant();" title="创建助手">＋</span></div>
 
         <!-- AionCLI (秘书，始终第一位) -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar cli-logo" style="box-shadow:0 0 0 2px var(--accent);"><img src="../../src/renderer/assets/logos/brand/aion.svg"></div>
           <div class="p-info">
             <div class="p-name">AionCLI <span style="font-size:10px; color:var(--accent); font-weight:500; background:#fff; padding:1px 6px; border-radius:4px; margin-left:4px;">秘书</span></div>
@@ -1782,16 +1970,9 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">帮我规划下周工作</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
         <!-- Cowork -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar"><img src="../../src/renderer/assets/profiles/cowork.jpg"></div>
           <div class="p-info">
             <div class="p-name">Cowork</div>
@@ -1800,27 +1981,9 @@
           <div class="p-badge">2</div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot unread"></span>
-            <span class="pc-label">画一只猫</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">修复登录 bug</span>
-            <span class="pc-tail"><span class="pc-workspace">📁 AionUi</span></span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">每日 PR Review</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
-        <!-- Claude Code (CLI) — 有未读 -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <!-- Claude Code (CLI) -->
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar cli-logo"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div>
           <div class="p-info">
             <div class="p-name">Claude Code</div>
@@ -1829,23 +1992,9 @@
           <div class="p-badge">1</div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot unread"></span>
-            <span class="pc-label">重构侧边栏组件</span>
-            <span class="pc-tail"><span class="pc-workspace">📁 AionUi</span></span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">优化导出性能</span>
-            <span class="pc-tail"><span class="pc-workspace">📁 OfficeCli</span></span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
         <!-- PPT 演示助手 -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar"><img src="../../src/renderer/assets/profiles/ppt-creator.jpg"></div>
           <div class="p-info">
             <div class="p-name">PPT 演示助手</div>
@@ -1853,16 +2002,9 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">Q2 季度汇报</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
         <!-- Morph PPT -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar"><img src="../../src/renderer/assets/profiles/morph-ppt.jpg"></div>
           <div class="p-info">
             <div class="p-name">Morph PPT</div>
@@ -1870,10 +2012,9 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;"></div>
 
         <!-- 学术论文助手 -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar"><img src="../../src/renderer/assets/profiles/academic-paper.jpg"></div>
           <div class="p-info">
             <div class="p-name">学术论文助手</div>
@@ -1881,16 +2022,9 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">帮我写一篇摘要</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
         <!-- UI/UX -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar"><img src="../../src/renderer/assets/profiles/ui-ux-pro-max.jpg"></div>
           <div class="p-info">
             <div class="p-name">UI/UX 专业设计师</div>
@@ -1898,10 +2032,9 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;"></div>
 
         <!-- Codex (CLI) -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar cli-logo"><img src="../../src/renderer/assets/logos/tools/coding/codex.svg"></div>
           <div class="p-info">
             <div class="p-name">Codex</div>
@@ -1909,7 +2042,6 @@
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;"></div>
 
         <div class="sidebar-divider"></div>
 
@@ -1919,8 +2051,8 @@
           <span class="section-add" onclick="event.stopPropagation(); openManageModal();" title="创建新团队">＋</span>
         </div>
 
-        <!-- AionUi 开发团队 (expanded) -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <!-- AionUi 开发团队 -->
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar group-avatar">
             <div class="ga-back"><img src="../../src/renderer/assets/profiles/cowork.jpg"></div>
             <div class="ga-front"><img src="../../src/renderer/assets/profiles/ui-ux-pro-max.jpg"></div>
@@ -1932,23 +2064,9 @@
           <div class="p-badge">2</div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
         </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot unread"></span>
-            <span class="pc-label">v2.0 侧边栏重设计</span>
-            <span class="pc-tail"><span class="pc-workspace">📁 AionUi</span></span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-          <div class="pconv">
-            <span class="pc-dot unread"></span>
-            <span class="pc-label">首页改版讨论</span>
-            <span class="pc-tail"><span class="pc-workspace">📁 AionUi</span></span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
-        </div>
 
-        <!-- 论文冲刺团队 (collapsed) -->
-        <div class="person-item" onclick="togglePerson(this)">
+        <!-- 论文冲刺团队 -->
+        <div class="person-item" onclick="clickPerson(this)">
           <div class="p-avatar group-avatar">
             <div class="ga-back"><img src="../../src/renderer/assets/profiles/academic-paper.jpg"></div>
             <div class="ga-front"><img src="../../src/renderer/assets/profiles/star-office-helper.jpg"></div>
@@ -1958,13 +2076,6 @@
             <div class="p-desc">学术论文助手 等 2 位成员</div>
           </div>
           <div class="p-actions"><span class="act-btn" title="更多">···</span></div>
-        </div>
-        <div class="person-convs" style="display:none;">
-          <div class="pconv">
-            <span class="pc-dot"></span>
-            <span class="pc-label">毕业论文终稿</span>
-            <span class="pc-actions"><span class="act-btn" title="更多">···</span></span>
-          </div>
         </div>
 
 
@@ -1979,7 +2090,7 @@
         <div class="sidebar-divider"></div>
 
         <div class="section-label">活跃任务</div>
-        <div class="conv-item" style="padding:8px 20px; flex-wrap:wrap; gap:4px;">
+        <div class="conv-item" style="padding:8px 20px; flex-wrap:wrap; gap:4px;" onclick="showCronDetail('每日代码审查')">
           <img src="../../src/renderer/assets/logos/ai-major/claude.svg" style="width:16px; height:16px; border-radius:50%; background:#f5f5f5; padding:2px; flex-shrink:0;">
           <span class="c-label" style="flex:1; min-width:0;">每日代码审查</span>
           <span style="font-size:10px; color:var(--text-muted); flex-shrink:0;">每天 09:00</span>
@@ -1988,7 +2099,7 @@
             <span style="font-size:10px; color:var(--text-muted);">· 今天 09:01</span>
           </div>
         </div>
-        <div class="conv-item" style="padding:8px 20px; flex-wrap:wrap; gap:4px;">
+        <div class="conv-item" style="padding:8px 20px; flex-wrap:wrap; gap:4px;" onclick="showCronDetail('周报汇总')">
           <img src="../../src/renderer/assets/profiles/cowork.jpg" style="width:16px; height:16px; border-radius:50%; flex-shrink:0;">
           <span class="c-label" style="flex:1; min-width:0;">周报汇总</span>
           <span style="font-size:10px; color:var(--text-muted); flex-shrink:0;">每周五 17:00</span>
@@ -2000,7 +2111,7 @@
 
         <div class="sidebar-divider"></div>
         <div class="section-label">已暂停</div>
-        <div class="conv-item" style="padding:8px 20px; opacity:0.5;">
+        <div class="conv-item" style="padding:8px 20px; opacity:0.5;" onclick="showCronDetail('日报生成')">
           <img src="../../src/renderer/assets/profiles/cowork.jpg" style="width:16px; height:16px; border-radius:50%; flex-shrink:0;">
           <span class="c-label">日报生成</span>
           <span style="margin-left:auto; font-size:10px; color:var(--text-muted);">已暂停</span>
@@ -2012,45 +2123,49 @@
         <div class="sidebar-divider"></div>
 
         <div class="section-label">AI 配置</div>
-        <div class="conv-item" style="padding:8px 20px;">
-          <span style="font-size:14px; margin-right:8px;">🤖</span>
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('Gemini 设置')">
+          <span style="font-size:14px; margin-right:8px;">💎</span>
           <span class="c-label">Gemini 设置</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('模型平台')">
           <span style="font-size:14px; margin-right:8px;">🧠</span>
-          <span class="c-label">模型选择</span>
+          <span class="c-label">模型平台</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
-          <span style="font-size:14px; margin-right:8px;">🛠</span>
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('助手管理')">
+          <span style="font-size:14px; margin-right:8px;">👥</span>
           <span class="c-label">助手管理</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('Agent 设置')">
+          <span style="font-size:14px; margin-right:8px;">🤖</span>
+          <span class="c-label">Agent 设置</span>
+        </div>
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('功能扩展')">
           <span style="font-size:14px; margin-right:8px;">⚡</span>
           <span class="c-label">功能扩展</span>
         </div>
 
         <div class="sidebar-divider"></div>
         <div class="section-label">应用</div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('显示与主题')">
           <span style="font-size:14px; margin-right:8px;">🎨</span>
           <span class="c-label">显示与主题</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('手机 / 网页访问')">
           <span style="font-size:14px; margin-right:8px;">📱</span>
           <span class="c-label">手机 / 网页访问</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('桌面宠物')">
           <span style="font-size:14px; margin-right:8px;">🐾</span>
           <span class="c-label">桌面宠物</span>
         </div>
 
         <div class="sidebar-divider"></div>
         <div class="section-label">其他</div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('系统设置')">
           <span style="font-size:14px; margin-right:8px;">⚙️</span>
           <span class="c-label">系统设置</span>
         </div>
-        <div class="conv-item" style="padding:8px 20px;">
+        <div class="conv-item" style="padding:8px 20px;" onclick="showSettingsPage('关于')">
           <span style="font-size:14px; margin-right:8px;">ℹ️</span>
           <span class="c-label">关于</span>
         </div>
@@ -2066,18 +2181,19 @@
   <div class="main">
 
     <!-- Home (new conversation) -->
-    <div class="home active" id="view-home">
+    <!-- (view-home removed — AionCLI landing is now the default) -->
 
-      <!-- Secretary: AionCLI -->
-      <div class="home-secretary">
-        <div class="home-avatar">
-          <img src="../../src/renderer/assets/logos/brand/aion.svg" style="object-fit:cover;">
+    <!-- Assistant Landing (new conversation for specific assistant) -->
+    <div class="assistant-landing" id="view-assistant-landing">
+      <div class="al-hero">
+        <div class="al-avatar" id="al-avatar-wrap">
+          <img id="al-avatar-img" src="">
         </div>
-        <div class="home-greeting">Hi，有什么可以帮你？</div>
-        <div class="home-subtitle">我是 AionCLI，你的专属秘书。直接说事，或者让我帮你找人。</div>
+        <div class="al-name" id="al-name-text"></div>
+        <div class="al-desc" id="al-desc-text"></div>
 
         <div class="input-area">
-          <textarea placeholder="描述你的需求，我来安排..."></textarea>
+          <textarea placeholder="描述你的需求..."></textarea>
           <div class="input-toolbar">
             <div class="input-tools">
               <span class="tool-btn">📎 文件</span>
@@ -2091,60 +2207,38 @@
           </div>
         </div>
 
-        <!-- 示例提示词 -->
-        <div style="width:100%; max-width:680px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:4px;">
-          <span style="font-size:12px; color:var(--text-tertiary); padding:5px 12px; border:1px solid var(--border); border-radius:16px; cursor:pointer; transition:all var(--transition);" onmouseenter="this.style.borderColor='var(--accent)'; this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text-tertiary)'">帮我写一篇周报</span>
-          <span style="font-size:12px; color:var(--text-tertiary); padding:5px 12px; border:1px solid var(--border); border-radius:16px; cursor:pointer; transition:all var(--transition);" onmouseenter="this.style.borderColor='var(--accent)'; this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text-tertiary)'">总结这个文件</span>
-          <span style="font-size:12px; color:var(--text-tertiary); padding:5px 12px; border:1px solid var(--border); border-radius:16px; cursor:pointer; transition:all var(--transition);" onmouseenter="this.style.borderColor='var(--accent)'; this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text-tertiary)'">帮我做一个 PPT</span>
-          <span style="font-size:12px; color:var(--text-tertiary); padding:5px 12px; border:1px solid var(--border); border-radius:16px; cursor:pointer; transition:all var(--transition);" onmouseenter="this.style.borderColor='var(--accent)'; this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'; this.style.color='var(--text-tertiary)'">翻译成英文</span>
-        </div>
-      </div>
+        <div class="al-prompts" id="al-prompts-area"></div>
 
-      <!-- Staff: only show those with unread messages (待办看板) -->
-      <div class="home-staff">
-        <div class="home-staff-header">
-          <div class="home-staff-title">有人找你</div>
-        </div>
-        <div class="staff-grid">
-          <div class="staff-card" onclick="staffGoChat('Claude Code')">
-            <div class="staff-badge">5</div>
-            <div class="staff-avatar cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div>
-            <div class="staff-name">Claude Code</div>
-            <div class="staff-desc">代码编写与调试</div>
-          </div>
-          <div class="staff-card" onclick="staffGoChat('PPT 演示助手')">
-            <div class="staff-badge">3</div>
-            <div class="staff-avatar"><img src="../../src/renderer/assets/profiles/ppt-creator.jpg"></div>
-            <div class="staff-name">PPT 演示助手</div>
-            <div class="staff-desc">专业 PPT 演示文稿</div>
-          </div>
-          <div class="staff-card" onclick="staffGoGroup('AionUi 开发团队')">
-            <div class="staff-badge">2</div>
-            <div class="staff-avatar-group">
-              <div class="sag-back"><img src="../../src/renderer/assets/profiles/cowork.jpg"></div>
-              <div class="sag-front"><img src="../../src/renderer/assets/profiles/ui-ux-pro-max.jpg"></div>
+        <div class="landing-convs" id="al-convs-area"></div>
+      </div>
+    </div>
+
+    <!-- Team Landing (new conversation for specific team) -->
+    <div class="team-landing" id="view-team-landing">
+      <div class="tl-hero">
+        <div class="tl-avatars" id="tl-avatars-area"></div>
+        <div class="tl-name" id="tl-name-text"></div>
+        <div class="tl-members" id="tl-members-text"></div>
+
+        <div class="input-area">
+          <textarea id="tl-textarea" placeholder="描述任务，Leader 会协调团队执行..."></textarea>
+          <div class="input-toolbar">
+            <div class="input-tools">
+              <span class="tool-btn">📎 文件</span>
+              <span class="tool-btn">📁 工作区</span>
+              <div class="llm-selector">
+                <span class="llm-badge">内置</span>
+                Gemini 2.5 Pro ▾
+              </div>
             </div>
-            <div class="staff-name">AionUi 开发团队</div>
-            <div class="staff-desc">侧边栏重设计</div>
-          </div>
-          <div class="staff-card" onclick="staffGoChat('UI/UX 专业设计师')">
-            <div class="staff-badge">1</div>
-            <div class="staff-avatar"><img src="../../src/renderer/assets/profiles/ui-ux-pro-max.jpg"></div>
-            <div class="staff-name">UI/UX 专业设计师</div>
-            <div class="staff-desc">界面与交互设计</div>
+            <button class="send-btn">↑</button>
           </div>
         </div>
-      </div>
 
-      <!-- Quick actions -->
-      <div class="home-quick" style="width:100%; max-width:680px; padding-top:8px; padding-bottom:48px; display:flex; align-items:center; justify-content:center; gap:24px; font-size:12px; color:var(--text-muted);">
-        <span style="cursor:pointer; transition:color var(--transition);" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--text-muted)'" onclick="openCreateAssistant()">＋ 创建新助手</span>
-        <span style="color:var(--border);">|</span>
-        <span style="cursor:pointer; transition:color var(--transition);" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--text-muted)'" onclick="switchRail('cron')">⏰ 定时任务</span>
-        <span style="color:var(--border);">|</span>
-        <span style="cursor:pointer; transition:color var(--transition);" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--text-muted)'" onclick="switchRail('settings')">⚙️ 设置</span>
-      </div>
+        <div class="al-prompts" id="tl-prompts-area"></div>
 
+        <div class="landing-convs" id="tl-convs-area"></div>
+      </div>
     </div>
 
     <!-- Single Chat View -->
@@ -2166,6 +2260,12 @@
           <div class="ch-panel-toggle" title="展开/收起工作空间" onclick="toggleWorkspacePanel()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
           </div>
+        </div>
+
+        <!-- Chat / Tasks tab bar -->
+        <div class="chat-tabs">
+          <div class="chat-tab active" onclick="switchChatTab(this, 'chat')"><span class="tab-icon">💬</span> 聊天</div>
+          <div class="chat-tab" onclick="switchChatTab(this, 'tasks')"><span class="tab-icon">📋</span> 任务</div>
         </div>
 
         <!-- Messages -->
@@ -2306,6 +2406,82 @@
 
         </div>
 
+        <!-- Tasks Board (kanban) -->
+        <div class="tasks-board">
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#bbb;"></span> Backlog
+              <span class="col-count">2</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TASK-5</div>
+                <div class="tc-title">适配暗色主题</div>
+                <div class="tc-desc">所有重构后的子组件需要适配暗色主题变量</div>
+                <div class="tc-footer"><span class="tc-priority low">Low</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+              <div class="task-card">
+                <div class="tc-id">TASK-6</div>
+                <div class="tc-title">补充单元测试</div>
+                <div class="tc-desc">为 ChatSection 和 PeopleSection 编写快照测试</div>
+                <div class="tc-footer"><span class="tc-priority medium">Medium</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#FFB300;"></span> Todo
+              <span class="col-count">2</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TASK-3</div>
+                <div class="tc-title">替换 SearchBar 为 Arco Input.Search</div>
+                <div class="tc-desc">ChatSection 里的搜索框替换为 Arco 组件</div>
+                <div class="tc-footer"><span class="tc-priority medium">Medium</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+              <div class="task-card">
+                <div class="tc-id">TASK-4</div>
+                <div class="tc-title">创建前端重构助手</div>
+                <div class="tc-desc">根据对话上下文生成助手配置</div>
+                <div class="tc-footer"><span class="tc-priority low">Low</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:var(--accent);"></span> In Progress
+              <span class="col-count">1</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TASK-2</div>
+                <div class="tc-title">拆分 Sider 子组件</div>
+                <div class="tc-desc">ChatSection / PeopleSection / FooterSection</div>
+                <div class="tc-footer"><span class="tc-priority high">High</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#2196F3;"></span> Done
+              <span class="col-count">1</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card" style="opacity:.6;">
+                <div class="tc-id">TASK-1</div>
+                <div class="tc-title">分析 Sider 目录结构</div>
+                <div class="tc-desc">分析当前结构，制定拆分方案</div>
+                <div class="tc-footer"><span class="tc-priority low">Low</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Chat Input -->
         <div class="chat-input-area">
           <div class="ci-box">
@@ -2391,6 +2567,12 @@
           <div class="ch-panel-toggle" title="展开/收起工作空间" onclick="toggleWorkspacePanel()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
           </div>
+        </div>
+
+        <!-- Chat / Tasks tab bar -->
+        <div class="chat-tabs">
+          <div class="chat-tab active" onclick="switchChatTab(this, 'chat')"><span class="tab-icon">💬</span> 聊天</div>
+          <div class="chat-tab" onclick="switchChatTab(this, 'tasks')"><span class="tab-icon">📋</span> 任务</div>
         </div>
 
         <!-- First-time tip -->
@@ -2566,6 +2748,71 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- Tasks Board (kanban) for group -->
+        <div class="tasks-board">
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#bbb;"></span> Backlog
+              <span class="col-count">1</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TEAM-4</div>
+                <div class="tc-title">移动端适配</div>
+                <div class="tc-desc">侧边栏在移动端需要折叠为抽屉模式</div>
+                <div class="tc-footer"><span class="tc-priority low">Low</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#FFB300;"></span> Todo
+              <span class="col-count">2</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TEAM-2</div>
+                <div class="tc-title">Icon Rail 交互实现</div>
+                <div class="tc-desc">实现 Rail 按钮切换、Badge 未读数、Tab 记忆</div>
+                <div class="tc-footer"><span class="tc-priority high">High</span><div class="tc-assignee cli"><img src="../../src/renderer/assets/logos/ai-major/claude.svg"></div></div>
+              </div>
+              <div class="task-card">
+                <div class="tc-id">TEAM-3</div>
+                <div class="tc-title">暗色主题适配</div>
+                <div class="tc-desc">前端开发（临时）负责样式和响应式适配</div>
+                <div class="tc-footer"><span class="tc-priority medium">Medium</span><div class="tc-assignee"><img src="../../src/renderer/assets/profiles/ui-ux-pro-max.jpg"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:var(--accent);"></span> In Progress
+              <span class="col-count">1</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-card">
+                <div class="tc-id">TEAM-1</div>
+                <div class="tc-title">v2.0 侧边栏骨架搭建</div>
+                <div class="tc-desc">Cowork 协调搭建整体骨架，分配子任务</div>
+                <div class="tc-footer"><span class="tc-priority high">High</span><div class="tc-assignee"><img src="../../src/renderer/assets/profiles/cowork.jpg"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="task-column">
+            <div class="task-col-header">
+              <span class="col-dot" style="background:#2196F3;"></span> Done
+              <span class="col-count">0</span>
+              <span class="col-add">＋</span>
+            </div>
+            <div class="task-col-body">
+              <div class="task-col-empty">No issues</div>
+            </div>
+          </div>
         </div>
 
         <!-- Group Chat Input -->
@@ -2976,6 +3223,110 @@
       </div>
     </div>
 
+    <!-- Cron Detail View (定时任务详情) -->
+    <div class="cron-detail" id="view-cron-detail">
+      <div class="cd-header">
+        <div class="cd-back" onclick="showView('none')" title="返回">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </div>
+        <div class="cd-title" id="cd-title">每日代码审查</div>
+        <div class="cd-status active" id="cd-status">活跃</div>
+      </div>
+      <div class="cd-body">
+
+        <div class="cd-section">
+          <div class="cd-section-title">基本信息</div>
+          <div class="cd-info-grid">
+            <div class="cd-info-card">
+              <div class="cd-info-label">关联助手</div>
+              <div class="cd-info-value" id="cd-agent">
+                <img src="../../src/renderer/assets/logos/ai-major/claude.svg" class="cli-icon">
+                Claude Code
+              </div>
+            </div>
+            <div class="cd-info-card">
+              <div class="cd-info-label">执行频率</div>
+              <div class="cd-info-value" id="cd-freq">每天 09:00</div>
+            </div>
+            <div class="cd-info-card">
+              <div class="cd-info-label">创建时间</div>
+              <div class="cd-info-value" id="cd-created">2026-04-10</div>
+            </div>
+            <div class="cd-info-card">
+              <div class="cd-info-label">执行模式</div>
+              <div class="cd-info-value" id="cd-mode">每次新建会话</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cd-section">
+          <div class="cd-section-title">执行提示词</div>
+          <div class="cd-prompt-box" id="cd-prompt">
+            检查项目中所有 open 的 PR，逐个 review 代码变更，给出改进建议。重点关注：类型安全、错误处理、命名规范。
+          </div>
+        </div>
+
+        <div class="cd-section">
+          <div class="cd-section-title">工作空间</div>
+          <div class="cd-info-grid" style="grid-template-columns: 1fr;">
+            <div class="cd-info-card">
+              <div class="cd-info-value">📁 AionUi</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cd-section">
+          <div class="cd-section-title">触发的会话</div>
+          <div id="cd-convs">
+            <div class="cd-conv-item" onclick="jumpToConvInWorkspace('每日 PR Review', false)">
+              <div style="width:6px; height:6px; border-radius:50; background:var(--accent); flex-shrink:0;"></div>
+              <div class="cd-conv-name">每日 PR Review · 4月29日</div>
+              <div class="cd-conv-status success">✓ 成功</div>
+              <div class="cd-conv-time">09:01</div>
+            </div>
+            <div class="cd-conv-item" onclick="jumpToConvInWorkspace('每日 PR Review', false)">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></div>
+              <div class="cd-conv-name">每日 PR Review · 4月28日</div>
+              <div class="cd-conv-status success">✓ 成功</div>
+              <div class="cd-conv-time">09:02</div>
+            </div>
+            <div class="cd-conv-item" onclick="jumpToConvInWorkspace('每日 PR Review', false)">
+              <div style="width:6px; height:6px; border-radius:50%; background:#C62828; flex-shrink:0;"></div>
+              <div class="cd-conv-name">每日 PR Review · 4月27日</div>
+              <div class="cd-conv-status fail">✕ 失败</div>
+              <div class="cd-conv-time">09:01</div>
+            </div>
+            <div class="cd-conv-item" onclick="jumpToConvInWorkspace('每日 PR Review', false)">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></div>
+              <div class="cd-conv-name">每日 PR Review · 4月26日</div>
+              <div class="cd-conv-status success">✓ 成功</div>
+              <div class="cd-conv-time">09:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cd-section">
+          <div class="cd-actions">
+            <div class="cd-btn" onclick="menuAlert('手动执行一次')()">▶ 立即执行</div>
+            <div class="cd-btn" onclick="menuAlert('编辑定时任务')()">✏️ 编辑</div>
+            <div class="cd-btn" onclick="menuAlert('暂停定时任务')()">⏸ 暂停</div>
+            <div class="cd-btn danger" onclick="menuAlert('删除定时任务')()">🗑 删除</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Settings Page View (设置详情页) -->
+    <div class="settings-page" id="view-settings">
+      <div class="sp-header">
+        <div class="sp-title" id="sp-title">模型选择</div>
+      </div>
+      <div class="sp-body" id="sp-body">
+        <!-- content injected by showSettingsPage() -->
+      </div>
+    </div>
+
   </div>
 
   </div><!-- /.app-body -->
@@ -3049,10 +3400,27 @@
     else if (name === 'people') switchRail('people');
     else switchRail(name);
   }
-  function togglePerson(el) {
-    const convs = el.nextElementSibling;
-    if (!convs || !convs.classList.contains('person-convs')) return;
-    convs.style.display = convs.style.display === 'none' ? 'block' : 'none';
+  function clickPerson(el) {
+    var isGroup = !!el.querySelector('.group-avatar');
+    var pnameEl = el.querySelector('.p-name');
+    var pname = pnameEl ? pnameEl.childNodes[0].textContent.trim() : '';
+    if (!pname) return;
+
+    document.querySelectorAll('.person-item.active').forEach(function(r) { r.classList.remove('active'); });
+    el.classList.add('active');
+
+    if (isGroup) {
+      showTeamLanding(pname);
+    } else {
+      showAssistantLanding(pname);
+    }
+
+    // Save tab memory for people rail
+    tabLastView['people'] = { restoreFn: function() {
+      selectPersonByName(pname);
+      if (isGroup) { showTeamLanding(pname); }
+      else { showAssistantLanding(pname); }
+    }};
   }
   function toggleFolder(el) {
     const children = el.nextElementSibling;
@@ -3072,7 +3440,9 @@
     document.querySelectorAll('.dropdown-menu, .dropdown-overlay').forEach(el => el.remove());
   }
 
+  var _lastMenuBtn = null;
   function showDropdown(btn, items) {
+    _lastMenuBtn = btn;
     closeDropdown();
     const rect = btn.getBoundingClientRect();
 
@@ -3149,14 +3519,12 @@
   /* Menu definitions by context */
   const MENUS = {
     assistant: [
-      { icon: '＋', label: '新建会话', action: menuAlert('新建会话') },
       { icon: '📌', label: '置顶', action: menuAlert('置顶助手') },
       { icon: '📋', label: '查看详情', action: function(){ openAssistantDetail(); } },
       '---',
       { icon: '🗑', label: '移除助手', danger: true, action: () => { if (confirm('移除此助手后，其下所有会话将被删除，确定？')) alert('已移除'); } },
     ],
     group: [
-      { icon: '＋', label: '新建会话', action: menuAlert('新建会话') },
       { icon: '📌', label: '置顶', action: menuAlert('置顶团队') },
       { icon: '⚙️', label: '团队设置', action: menuAlert('团队设置') },
       '---',
@@ -3198,49 +3566,259 @@
 
   /* ---- View switching ---- */
   function showView(name) {
-    document.getElementById('view-home').classList.toggle('active', name === 'home');
+    document.getElementById('view-assistant-landing').classList.toggle('active', name === 'assistant-landing');
+    document.getElementById('view-team-landing').classList.toggle('active', name === 'team-landing');
     document.getElementById('view-chat').classList.toggle('active', name === 'chat');
     document.getElementById('view-group').classList.toggle('active', name === 'group');
     document.getElementById('view-solo').classList.toggle('active', name === 'solo');
-    if (name === 'home') {
-      document.querySelectorAll('.conv-item.active:not(.new-message-row)').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.pconv.active').forEach(el => el.classList.remove('active'));
+    document.getElementById('view-cron-detail').classList.toggle('active', name === 'cron-detail');
+    document.getElementById('view-settings').classList.toggle('active', name === 'settings');
+  }
+
+  /* ---- Logo click → go to AionCLI landing ---- */
+  function selectNewMessage() {
+    switchRail('people');
+    document.querySelectorAll('.conv-item.active').forEach(el => el.classList.remove('active'));
+    selectPersonByName('AionCLI');
+    showAssistantLanding('AionCLI');
+  }
+
+  /* ---- Assistant landing page (new conversation for specific assistant) ---- */
+  var ASSISTANT_DATA = {
+    'AionCLI': {
+      avatar: '../../src/renderer/assets/logos/brand/aion.svg',
+      cli: true,
+      desc: '你的专属秘书。直接说事，或者让我帮你找人。',
+      prompts: ['帮我写一篇周报', '总结这个文件', '帮我做一个 PPT', '翻译成英文'],
+      convs: [{ name: '帮我规划下周工作', unread: false }]
+    },
+    'Cowork': {
+      avatar: '../../src/renderer/assets/profiles/cowork.jpg',
+      desc: '自主任务执行、文件操作、多步骤工作流。',
+      prompts: ['帮我重构这个模块', '执行完整的测试流程', '分析项目结构并优化'],
+      convs: [
+        { name: '画一只猫', unread: true },
+        { name: '修复登录 bug', workspace: 'AionUi', unread: false },
+        { name: '每日 PR Review', unread: false },
+      ]
+    },
+    'Claude Code': {
+      avatar: '../../src/renderer/assets/logos/ai-major/claude.svg',
+      cli: true,
+      desc: 'Anthropic CLI Agent，代码编写与调试。',
+      prompts: ['修复这个 bug', '写一个单元测试', '重构这段代码', '帮我 review 这个 PR'],
+      convs: [
+        { name: '重构侧边栏组件', workspace: 'AionUi', unread: true },
+        { name: '优化导出性能', workspace: 'OfficeCli', unread: false },
+      ]
+    },
+    'PPT 演示助手': {
+      avatar: '../../src/renderer/assets/profiles/ppt-creator.jpg',
+      desc: '创建、编辑专业 PPT 演示文稿。',
+      prompts: ['做一个产品介绍 PPT', '美化这份幻灯片', '帮我加一页总结'],
+      convs: [{ name: 'Q2 季度汇报', unread: false }]
+    },
+    'Morph PPT': {
+      avatar: '../../src/renderer/assets/profiles/morph.jpg',
+      desc: 'Morph 动画演示文稿制作。',
+      prompts: ['制作一个 Morph 过渡动画', '把静态 PPT 做成动态'],
+      convs: []
+    },
+    '学术论文助手': {
+      avatar: '../../src/renderer/assets/profiles/academic.jpg',
+      desc: '学术论文、研究论文写作辅助。',
+      prompts: ['帮我写论文摘要', '检查引用格式', '润色这段学术文字'],
+      convs: [{ name: '帮我写一篇摘要', unread: false }]
+    },
+    'UI/UX 专业设计师': {
+      avatar: '../../src/renderer/assets/profiles/ui-ux-pro-max.jpg',
+      desc: 'UI 界面与交互设计专家。',
+      prompts: ['设计一个登录页', '优化这个表单的交互', '给配色方案提建议'],
+      convs: []
+    },
+    'Codex': {
+      avatar: '../../src/renderer/assets/logos/ai-major/openai.svg',
+      cli: true,
+      desc: 'OpenAI CLI Agent。',
+      prompts: ['帮我写个脚本', '优化这段算法'],
+      convs: []
+    }
+  };
+
+  function showAssistantLanding(name) {
+    var data = ASSISTANT_DATA[name];
+    if (!data) { alert('未找到助手：' + name); return; }
+
+    var avatarWrap = document.getElementById('al-avatar-wrap');
+    var avatarImg = document.getElementById('al-avatar-img');
+    var nameEl = document.getElementById('al-name-text');
+    var descEl = document.getElementById('al-desc-text');
+    var promptsEl = document.getElementById('al-prompts-area');
+
+    avatarImg.src = data.avatar;
+    avatarWrap.className = 'al-avatar' + (data.cli ? ' cli-logo' : '');
+    nameEl.textContent = name;
+    descEl.textContent = data.desc;
+
+    promptsEl.innerHTML = '';
+    if (data.prompts) {
+      data.prompts.forEach(function(p) {
+        var chip = document.createElement('span');
+        chip.className = 'al-chip';
+        chip.textContent = p;
+        chip.onclick = function() {
+          var ta = document.querySelector('#view-assistant-landing .input-area textarea');
+          if (ta) { ta.value = p; ta.focus(); }
+        };
+        promptsEl.appendChild(chip);
+      });
+    }
+
+    renderLandingConvs(document.getElementById('al-convs-area'), data.convs, false);
+    showView('assistant-landing');
+  }
+
+  function renderLandingConvs(container, convs, isGroup) {
+    container.innerHTML = '';
+    if (!convs || convs.length === 0) return;
+    var title = document.createElement('div');
+    title.className = 'landing-convs-title';
+    title.textContent = '最近会话';
+    container.appendChild(title);
+    convs.forEach(function(c) {
+      var row = document.createElement('div');
+      row.className = 'landing-conv-item' + (c.unread ? ' unread' : '');
+      row.onclick = function() {
+        jumpToConvInWorkspace(c.name, isGroup);
+      };
+      var name = document.createElement('div');
+      name.className = 'landing-conv-name';
+      name.textContent = c.name;
+      row.appendChild(name);
+      if (c.workspace) {
+        var ws = document.createElement('div');
+        ws.className = 'landing-conv-ws';
+        ws.textContent = '📁 ' + c.workspace;
+        row.appendChild(ws);
+      }
+      container.appendChild(row);
+    });
+  }
+
+  /* ---- Click a conv in landing page → jump to workspace panel + select it ---- */
+  function jumpToConvInWorkspace(convName, isGroup) {
+    // Switch to workspace rail
+    switchRail('chat');
+    // Find matching conv-item in panel-chat by label text
+    var found = null;
+    document.querySelectorAll('#panel-chat .conv-item').forEach(function(el) {
+      var label = el.querySelector('.c-label');
+      if (label && label.textContent.trim() === convName) { found = el; }
+    });
+    if (found) {
+      // Expand parent folder if collapsed
+      var parent = found.parentElement;
+      if (parent && parent.classList.contains('folder-children') && parent.style.display === 'none') {
+        parent.style.display = 'block';
+        var folder = parent.previousElementSibling;
+        if (folder) {
+          var icon = folder.querySelector('.f-icon');
+          if (icon) icon.textContent = '📂';
+        }
+      }
+      // Select it
+      document.querySelectorAll('.conv-item.active').forEach(function(c) { c.classList.remove('active'); });
+      found.classList.add('active');
+      var viewName = isGroup ? 'group' : 'chat';
+      showView(viewName);
+      // Save tab memory
+      tabLastView['chat'] = { restoreFn: function() {
+        document.querySelectorAll('.conv-item.active').forEach(function(c) { c.classList.remove('active'); });
+        found.classList.add('active');
+        showView(viewName);
+      }};
+    } else {
+      // Conv not in workspace panel — just show the chat/group view
+      showView(isGroup ? 'group' : 'chat');
     }
   }
 
-  /* ---- "新消息" row click ---- */
-  function selectNewMessage() {
-    document.querySelectorAll('.conv-item.active').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.pconv.active').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.new-message-row').forEach(el => el.classList.add('active'));
-    showView('home');
-  }
+  /* ---- Team landing page (new conversation for specific team) ---- */
+  var TEAM_DATA = {
+    'AionUi 开发团队': {
+      members: [
+        { name: 'Cowork', avatar: '../../src/renderer/assets/profiles/cowork.jpg' },
+        { name: 'UI/UX 专业设计师', avatar: '../../src/renderer/assets/profiles/ui-ux-pro-max.jpg' },
+        { name: 'Claude Code', avatar: '../../src/renderer/assets/logos/ai-major/claude.svg' },
+        { name: 'Codex', avatar: '../../src/renderer/assets/logos/ai-major/openai.svg' },
+      ],
+      leader: 'Cowork',
+      prompts: ['重构侧边栏组件', '修复首页性能问题', '做一轮完整的 Code Review'],
+      convs: [
+        { name: 'v2.0 侧边栏重设计', workspace: 'AionUi', unread: true },
+        { name: '首页改版讨论', workspace: 'AionUi', unread: true },
+      ]
+    },
+    '论文冲刺团队': {
+      members: [
+        { name: '学术论文助手', avatar: '../../src/renderer/assets/profiles/academic-paper.jpg' },
+        { name: 'Star Office', avatar: '../../src/renderer/assets/profiles/star-office-helper.jpg' },
+      ],
+      leader: '学术论文助手',
+      prompts: ['帮我完成毕业论文终稿', '检查全文引用格式', '润色摘要和结论'],
+      convs: [{ name: '毕业论文终稿', unread: false }]
+    }
+  };
 
-  /* ---- Staff card click → jump to chat ---- */
-  function staffGoChat(name) {
-    switchTab('people');
-    showView('chat');
-    document.querySelector('#view-chat .chat-header .ch-name').textContent = name + ' — 最新会话';
-    selectPersonByName(name);
-  }
+  function showTeamLanding(name) {
+    var data = TEAM_DATA[name];
+    if (!data) { alert('未找到团队：' + name); return; }
 
-  function staffGoGroup(name) {
-    switchTab('people');
-    showView('group');
-    selectPersonByName(name);
+    var avatarsEl = document.getElementById('tl-avatars-area');
+    var nameEl = document.getElementById('tl-name-text');
+    var membersEl = document.getElementById('tl-members-text');
+    var textarea = document.getElementById('tl-textarea');
+
+    avatarsEl.innerHTML = '';
+    data.members.forEach(function(m) {
+      var av = document.createElement('div');
+      av.className = 'tl-av';
+      var img = document.createElement('img');
+      img.src = m.avatar;
+      av.appendChild(img);
+      avatarsEl.appendChild(av);
+    });
+
+    nameEl.textContent = name;
+    membersEl.textContent = data.leader + ' 等 ' + data.members.length + ' 位成员';
+    textarea.placeholder = '描述任务，' + data.leader + ' 会协调团队执行...';
+
+    var promptsEl = document.getElementById('tl-prompts-area');
+    promptsEl.innerHTML = '';
+    if (data.prompts) {
+      data.prompts.forEach(function(p) {
+        var chip = document.createElement('span');
+        chip.className = 'al-chip';
+        chip.textContent = p;
+        chip.onclick = function() {
+          textarea.value = p;
+          textarea.focus();
+        };
+        promptsEl.appendChild(chip);
+      });
+    }
+
+    renderLandingConvs(document.getElementById('tl-convs-area'), data.convs, true);
+    showView('team-landing');
   }
 
   function selectPersonByName(name) {
-    document.querySelectorAll('.pconv.active').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.person-item.active').forEach(function(p) { p.classList.remove('active'); });
     document.querySelectorAll('#panel-people .person-item').forEach(function(item) {
-      var pName = item.querySelector('.p-name');
-      if (pName && pName.textContent.trim() === name) {
-        var convs = item.nextElementSibling;
-        if (convs && convs.classList.contains('person-convs')) {
-          convs.style.display = 'block';
-          var firstConv = convs.querySelector('.pconv');
-          if (firstConv) firstConv.classList.add('active');
-        }
+      var pNameEl = item.querySelector('.p-name');
+      var pName = pNameEl ? pNameEl.childNodes[0].textContent.trim() : '';
+      if (pName === name) {
+        item.classList.add('active');
       }
     });
   }
@@ -3280,12 +3858,320 @@
     return person && !!person.querySelector('.group-avatar');
   }
 
+  /* ---- Chat / Tasks tab switching ---- */
+  function switchChatTab(tabEl, mode) {
+    var chatMain = tabEl.closest('.chat-main');
+    if (!chatMain) return;
+    chatMain.querySelectorAll('.chat-tab').forEach(function(t) { t.classList.remove('active'); });
+    tabEl.classList.add('active');
+    var messages = chatMain.querySelector('.chat-messages');
+    var board = chatMain.querySelector('.tasks-board');
+    var input = chatMain.querySelector('.chat-input-area');
+    var tip = chatMain.querySelector('.group-tip');
+    if (mode === 'tasks') {
+      if (messages) messages.style.display = 'none';
+      if (board) board.classList.add('active');
+      if (input) input.style.display = 'none';
+      if (tip) tip.style.display = 'none';
+    } else {
+      if (messages) messages.style.display = '';
+      if (board) board.classList.remove('active');
+      if (input) input.style.display = '';
+    }
+  }
+
   function toggleWorkspacePanel() {
     const panels = document.querySelectorAll('.workspace-panel');
     panels.forEach(p => {
       const isHidden = p.style.display === 'none';
       p.style.display = isHidden ? 'flex' : 'none';
     });
+  }
+
+  /* ---- Cron Detail ---- */
+  var CRON_DATA = {
+    '每日代码审查': {
+      agent: 'Claude Code',
+      agentAvatar: '../../src/renderer/assets/logos/ai-major/claude.svg',
+      cli: true,
+      freq: '每天 09:00',
+      created: '2026-04-10',
+      mode: '每次新建会话',
+      workspace: 'AionUi',
+      prompt: '检查项目中所有 open 的 PR，逐个 review 代码变更，给出改进建议。重点关注：类型安全、错误处理、命名规范。',
+      status: 'active',
+      convs: [
+        { name: '每日 PR Review · 4月29日', time: '09:01', status: 'success', convName: '每日 PR Review' },
+        { name: '每日 PR Review · 4月28日', time: '09:02', status: 'success', convName: '每日 PR Review' },
+        { name: '每日 PR Review · 4月27日', time: '09:01', status: 'fail', convName: '每日 PR Review' },
+        { name: '每日 PR Review · 4月26日', time: '09:00', status: 'success', convName: '每日 PR Review' },
+      ]
+    },
+    '周报汇总': {
+      agent: 'Cowork',
+      agentAvatar: '../../src/renderer/assets/profiles/cowork.jpg',
+      cli: false,
+      freq: '每周五 17:00',
+      created: '2026-03-15',
+      mode: '每次新建会话',
+      workspace: 'AionUi',
+      prompt: '汇总本周所有团队成员的工作进展，生成一份结构化周报。包括：已完成任务、进行中任务、遇到的问题、下周计划。',
+      status: 'active',
+      convs: [
+        { name: '周报汇总 · 4月25日', time: '17:02', status: 'success', convName: '周报汇总' },
+        { name: '周报汇总 · 4月18日', time: '17:01', status: 'success', convName: '周报汇总' },
+        { name: '周报汇总 · 4月11日', time: '17:03', status: 'success', convName: '周报汇总' },
+      ]
+    },
+    '日报生成': {
+      agent: 'Cowork',
+      agentAvatar: '../../src/renderer/assets/profiles/cowork.jpg',
+      cli: false,
+      freq: '每天 18:00',
+      created: '2026-02-20',
+      mode: '追加到同一会话',
+      workspace: '',
+      prompt: '根据今天的 git commit 和 PR 活动，生成一份简洁日报。',
+      status: 'paused',
+      convs: [
+        { name: '日报 · 4月15日', time: '18:01', status: 'success', convName: '日报生成' },
+      ]
+    }
+  };
+
+  function showCronDetail(name) {
+    var data = CRON_DATA[name];
+    if (!data) { menuAlert('定时任务：' + name)(); return; }
+    document.getElementById('cd-title').textContent = name;
+    var statusEl = document.getElementById('cd-status');
+    statusEl.textContent = data.status === 'active' ? '活跃' : '已暂停';
+    statusEl.className = 'cd-status ' + (data.status === 'active' ? 'active' : 'paused');
+
+    document.getElementById('cd-agent').innerHTML =
+      '<img src="' + data.agentAvatar + '"' + (data.cli ? ' class="cli-icon"' : '') + '> ' + data.agent;
+    document.getElementById('cd-freq').textContent = data.freq;
+    document.getElementById('cd-created').textContent = data.created;
+    document.getElementById('cd-mode').textContent = data.mode;
+    document.getElementById('cd-prompt').textContent = data.prompt;
+
+    var convsEl = document.getElementById('cd-convs');
+    convsEl.innerHTML = '';
+    data.convs.forEach(function(c) {
+      var item = document.createElement('div');
+      item.className = 'cd-conv-item';
+      item.onclick = function() { jumpToConvInWorkspace(c.convName, false); };
+      var dot = document.createElement('div');
+      dot.style.cssText = 'width:6px; height:6px; border-radius:50%; flex-shrink:0; background:' + (c.status === 'success' ? 'var(--accent)' : '#C62828');
+      item.appendChild(dot);
+      var nameDiv = document.createElement('div');
+      nameDiv.className = 'cd-conv-name';
+      nameDiv.textContent = c.name;
+      item.appendChild(nameDiv);
+      var statusDiv = document.createElement('div');
+      statusDiv.className = 'cd-conv-status ' + c.status;
+      statusDiv.textContent = c.status === 'success' ? '✓ 成功' : '✕ 失败';
+      item.appendChild(statusDiv);
+      var timeDiv = document.createElement('div');
+      timeDiv.className = 'cd-conv-time';
+      timeDiv.textContent = c.time;
+      item.appendChild(timeDiv);
+      convsEl.appendChild(item);
+    });
+
+    if (data.convs.length === 0) {
+      convsEl.innerHTML = '<div style="font-size:12px; color:var(--text-muted); padding:16px 0;">暂无触发的会话</div>';
+    }
+
+    // Highlight active cron item in sidebar
+    document.querySelectorAll('#panel-cron .conv-item').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelectorAll('#panel-cron .conv-item').forEach(function(el) {
+      var label = el.querySelector('.c-label');
+      if (label && label.textContent.trim() === name) el.classList.add('active');
+    });
+
+    showView('cron-detail');
+    tabLastView['cron'] = { restoreFn: function() { showCronDetail(name); } };
+  }
+
+  /* ---- Settings Pages ---- */
+  function spRow(label, desc, right) { return '<div class="sp-row"><div><div class="sp-row-label">' + label + '</div>' + (desc ? '<div class="sp-row-desc">' + desc + '</div>' : '') + '</div><div class="sp-row-right">' + right + '</div></div>'; }
+  function spToggle(on) { return '<div class="sp-toggle' + (on ? ' on' : '') + '" onclick="this.classList.toggle(\'on\')"></div>'; }
+  function spSel(opts, sel) { return '<select class="sp-select">' + opts.map(function(o) { return '<option' + (o === sel ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select>'; }
+  function spBtn(label, cls) { return '<div class="sp-btn' + (cls ? ' ' + cls : '') + '">' + label + '</div>'; }
+  function spVal(v) { return '<span class="sp-value">' + v + '</span>'; }
+  function spAvRow(src, cli, name, desc, right) {
+    var s = cli ? 'background:#f5f5f5; padding:4px;' : '';
+    return '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><img src="' + src + '" style="width:28px; height:28px; border-radius:50%;' + s + '"><div><div class="sp-row-label">' + name + '</div><div class="sp-row-desc">' + desc + '</div></div></div><div class="sp-row-right">' + right + '</div></div>';
+  }
+  function spSec(title, cardHtml) { return '<div class="sp-section"><div class="sp-section-title">' + title + '</div><div class="sp-card">' + cardHtml + '</div></div>'; }
+
+  var SETTINGS_PAGES = {
+    'Gemini 设置': function() {
+      return spSec('账号认证', spRow('Google 账号', '登录 Google 账号以使用 Gemini 个人配额', spBtn('登录 Google 账号', 'primary')) +
+        spRow('代理设置', '用于 Gemini API 请求的 HTTP/HTTPS 代理', '<input class="sp-select" style="width:200px;" placeholder="http://127.0.0.1:7890">')) +
+      spSec('项目配置',
+        spRow('GOOGLE_CLOUD_PROJECT', 'Google Cloud 项目 ID（可选，用于 Vertex AI）', '<input class="sp-select" style="width:200px;" placeholder="my-project-id">') +
+        spRow('YOLO 模式（自动放行）', '跳过所有操作确认，自动允许文件修改和命令执行', spToggle(false)));
+    },
+    '模型平台': function() {
+      return spSec('已添加平台',
+        '<div class="sp-row" style="border-bottom:1px solid var(--border-light); padding-bottom:16px;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; border-radius:6px; background:#10a37f; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;">O</div><div><div class="sp-row-label">OpenAI</div><div class="sp-row-desc">GPT-4.1, o3, text-embedding-3</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); background:var(--accent-light); padding:2px 8px; border-radius:4px;">3 模型可用</span>' + spBtn('编辑') + '</div></div>' +
+        '<div class="sp-row" style="border-bottom:1px solid var(--border-light); padding-bottom:16px;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; border-radius:6px; background:#d4a574; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;">A</div><div><div class="sp-row-label">Anthropic</div><div class="sp-row-desc">Claude Sonnet 4.6, Claude Haiku 4.5</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); background:var(--accent-light); padding:2px 8px; border-radius:4px;">2 模型可用</span>' + spBtn('编辑') + '</div></div>' +
+        '<div class="sp-row" style="border-bottom:1px solid var(--border-light); padding-bottom:16px;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; border-radius:6px; background:#4285f4; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;">G</div><div><div class="sp-row-label">Google AI</div><div class="sp-row-desc">Gemini 2.5 Pro, Gemini 2.5 Flash</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); background:var(--accent-light); padding:2px 8px; border-radius:4px;">2 模型可用</span>' + spBtn('编辑') + '</div></div>' +
+        '<div class="sp-row" style="border-bottom:1px solid var(--border-light); padding-bottom:16px;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; border-radius:6px; background:#0066ff; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;">D</div><div><div class="sp-row-label">DeepSeek</div><div class="sp-row-desc">未配置</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--text-muted); background:#f5f5f5; padding:2px 8px; border-radius:4px;">未配置</span>' + spBtn('配置', 'primary') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; border-radius:6px; background:#f5f5f5; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:12px; font-weight:700;">AWS</div><div><div class="sp-row-label">AWS Bedrock</div><div class="sp-row-desc">通过 AWS 调用 Claude / Titan 等模型</div></div></div><div class="sp-row-right">' + spBtn('配置', 'primary') + '</div></div>') +
+      '<div class="sp-section"><div style="text-align:center; padding:8px 0;">' + spBtn('＋ 添加自定义平台（new-api / One API）', 'primary') + '</div></div>' +
+      spSec('平台编辑说明', '<div style="font-size:12px; color:var(--text-muted); line-height:1.8; padding:8px 0;">每个平台可配置：<br>· <b>Base URL</b> — API 端点地址<br>· <b>API Key</b> — 支持多 Key 轮换（一行一个）<br>· <b>可用模型列表</b> — 勾选启用的模型<br>· <b>模型协议</b> — 自定义平台可选 OpenAI / Anthropic / Gemini 协议<br>· <b>模型健康检测</b> — 自动检测模型可用性</div>');
+    },
+    '助手管理': function() {
+      var P = '../../src/renderer/assets/profiles/', L = '../../src/renderer/assets/logos/ai-major/';
+      return spSec('已安装助手',
+        spAvRow(P+'cowork.jpg', false, 'Cowork', '自主任务执行、文件操作、多步骤工作流', spToggle(true) + spBtn('编辑')) +
+        spAvRow(L+'claude.svg', true, 'Claude Code', 'Anthropic CLI Agent，代码编写与调试', spToggle(true) + spBtn('编辑')) +
+        spAvRow(P+'ppt-creator.jpg', false, 'PPT 演示助手', '创建、编辑专业 PPT 演示文稿', spToggle(true) + spBtn('编辑')) +
+        spAvRow(L+'openai.svg', true, 'Codex', 'OpenAI CLI Agent', spToggle(true) + spBtn('编辑'))) +
+      spSec('预设助手',
+        spAvRow(P+'academic.jpg', false, '学术论文助手', '学术论文、研究论文写作辅助', spToggle(true) + spBtn('复制')) +
+        spAvRow(P+'morph.jpg', false, 'Morph PPT', 'Morph 动画演示文稿制作', spToggle(true) + spBtn('复制')) +
+        spAvRow(P+'ui-ux-pro-max.jpg', false, 'UI/UX 专业设计师', 'UI 界面与交互设计专家', spToggle(true) + spBtn('复制'))) +
+      '<div class="sp-section"><div class="sp-section-title">助手编辑说明</div><div class="sp-card"><div style="font-size:12px; color:var(--text-muted); line-height:1.8; padding:8px 0;">每个助手可编辑：<br>· <b>名称 & 头像</b> — 自定义身份信息<br>· <b>描述</b> — 功能简述<br>· <b>主 Agent</b> — 绑定的执行引擎<br>· <b>系统提示词</b> — Markdown 格式的行为规则<br>· <b>可用模型</b> — 该助手可调用的模型列表<br>· <b>技能配置</b> — 启用/禁用技能</div></div></div>';
+    },
+    'Agent 设置': function() {
+      var L = '../../src/renderer/assets/logos/ai-major/';
+      return spSec('本地 Agent（自动检测）',
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><img src="' + L + 'claude.svg" style="width:28px; height:28px; border-radius:50%; background:#f5f5f5; padding:4px;"><div><div class="sp-row-label">Claude Code</div><div class="sp-row-desc">/usr/local/bin/claude · ACP</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); background:var(--accent-light); padding:2px 8px; border-radius:4px;">● 已连接</span></div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><img src="' + L + 'openai.svg" style="width:28px; height:28px; border-radius:50%; background:#f5f5f5; padding:4px;"><div><div class="sp-row-label">Codex</div><div class="sp-row-desc">/usr/local/bin/codex · ACP</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); background:var(--accent-light); padding:2px 8px; border-radius:4px;">● 已连接</span></div></div>') +
+      spSec('自定义 Agent',
+        spRow('显示名称', '在助手列表中显示的名称', '<input class="sp-select" style="width:180px;" placeholder="My Agent">') +
+        spRow('命令', 'Agent 可执行文件路径', '<input class="sp-select" style="width:180px;" placeholder="/path/to/agent">') +
+        spRow('参数', '启动参数', '<input class="sp-select" style="width:180px;" placeholder="--flag value">') +
+        spRow('环境变量', '以 KEY=VALUE 格式配置', '<input class="sp-select" style="width:180px;" placeholder="API_KEY=xxx">') +
+        '<div style="display:flex; gap:8px; padding:12px 0;">' + spBtn('测试连接') + spBtn('添加', 'primary') + '</div>') +
+      spSec('远程 Agent',
+        spRow('名称', '远程 Agent 显示名', '<input class="sp-select" style="width:180px;" placeholder="Remote Agent">') +
+        spRow('URL', 'Agent 服务端点', '<input class="sp-select" style="width:180px;" placeholder="https://agent.example.com">') +
+        spRow('认证方式', '访问凭证', spSel(['无','Bearer Token'], '无')) +
+        spRow('允许不安全连接', '跳过 TLS 证书验证（自签名证书）', spToggle(false)) +
+        '<div style="display:flex; gap:8px; padding:12px 0;">' + spBtn('测试连接') + spBtn('添加', 'primary') + '</div>');
+    },
+    '功能扩展': function() {
+      return spSec('技能（Skills）',
+        spRow('网页搜索', '搜索引擎集成', spToggle(true)) +
+        spRow('文件操作', '读写、创建、删除文件', spToggle(true)) +
+        spRow('代码执行', '终端命令和脚本运行', spToggle(true)) +
+        spRow('图像生成', '调用 DALL-E / Stable Diffusion 生成图片', spToggle(false)) +
+        '<div style="display:flex; gap:8px; padding:12px 0;">' + spBtn('＋ 导入自定义技能', 'primary') + '</div>') +
+      spSec('MCP 服务器',
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></div><div><div class="sp-row-label">filesystem</div><div class="sp-row-desc">本地文件系统读写 · 3 个工具</div></div></div><div class="sp-row-right">' + spToggle(true) + spBtn('编辑') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></div><div><div class="sp-row-label">browser</div><div class="sp-row-desc">网页抓取与浏览 · 5 个工具</div></div></div><div class="sp-row-right">' + spToggle(true) + spBtn('编辑') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#bbb; flex-shrink:0;"></div><div><div class="sp-row-label">memory</div><div class="sp-row-desc">已断开 · 2 个工具</div></div></div><div class="sp-row-right">' + spToggle(false) + spBtn('编辑') + '</div></div>' +
+        '<div style="display:flex; gap:8px; padding:12px 0;">' + spBtn('＋ 手动添加') + spBtn('从 JSON 导入') + spBtn('从 CLI 一键导入', 'primary') + '</div>') +
+      spSec('语音输入（Speech to Text）',
+        spRow('启用语音输入', '在对话输入框中显示录音按钮', spToggle(false)) +
+        spRow('语音服务商', '选择语音识别引擎', spSel(['OpenAI Whisper','Deepgram Nova-2'], 'OpenAI Whisper')) +
+        spRow('API Key', '语音服务的认证密钥', '<input class="sp-select" style="width:180px;" type="password" placeholder="sk-...">') +
+        spRow('默认语言', '语音识别的默认语言', spSel(['自动检测','中文','English','日本語'], '自动检测')));
+    },
+    '显示与主题': function() {
+      return spSec('外观',
+        spRow('主题', '调整应用的外观风格', spSel(['浅色','深色','跟随系统'], '浅色')) +
+        spRow('强调色', '按钮、链接等交互元素的颜色', '<div style="display:flex; gap:6px;"><div style="width:20px; height:20px; border-radius:50%; background:#4CAF50; cursor:pointer; box-shadow:0 0 0 2px #fff, 0 0 0 3px #4CAF50;"></div><div style="width:20px; height:20px; border-radius:50%; background:#2196F3; cursor:pointer;"></div><div style="width:20px; height:20px; border-radius:50%; background:#9C27B0; cursor:pointer;"></div><div style="width:20px; height:20px; border-radius:50%; background:#FF9800; cursor:pointer;"></div></div>') +
+        spRow('界面缩放', '调整整体 UI 大小', spSel(['80%','90%','100%','110%','120%'], '100%') + ' ' + spBtn('重置'))) +
+      spSec('CSS 主题',
+        spRow('当前主题', '自定义 CSS 主题方案', spSel(['默认','毛玻璃','暗夜紫'], '默认')) +
+        '<div class="sp-row"><div><div class="sp-row-label">自定义 CSS</div><div class="sp-row-desc">输入自定义 CSS 代码覆盖默认样式</div></div></div>' +
+        '<div style="background:#f8f8f8; border-radius:8px; padding:12px; margin:8px 0; font-family:monospace; font-size:11px; color:var(--text-secondary); min-height:60px; border:1px solid var(--border-light);">/* 在此输入自定义 CSS */</div>' +
+        '<div style="display:flex; gap:8px; padding:4px 0;">' + spBtn('预览') + spBtn('应用', 'primary') + spBtn('＋ 添加新主题') + '</div>') +
+      spSec('侧边栏',
+        spRow('默认面板', '启动时默认显示的面板', spSel(['通讯录','工作区'], '通讯录')) +
+        spRow('紧凑模式', '减小列表行间距', spToggle(false)));
+    },
+    '手机 / 网页访问': function() {
+      return spSec('WebUI 服务',
+        spRow('启用 WebUI', '启动内置 Web 服务器', spToggle(true)) +
+        spRow('端口', 'Web 服务监听端口', '<input class="sp-select" style="width:80px;" type="number" value="3210">') +
+        spRow('允许远程访问', '允许局域网内其他设备访问', spToggle(true)) +
+        '<div style="display:flex; gap:8px; padding:12px 0;">' + spBtn('停止服务', '') + spBtn('重启服务', 'primary') + '</div>' +
+        spRow('本地地址', '', spVal('http://localhost:3210')) +
+        spRow('局域网地址', '', spVal('http://192.168.1.100:3210'))) +
+      spSec('扫码连接',
+        '<div class="sp-qr-area"><div class="sp-qr">⬜</div><div class="sp-qr-info"><div class="sp-url">http://192.168.1.100:3210</div><div class="sp-url-desc">在同一局域网下，使用手机扫描二维码或输入地址访问。<br>当前状态：<span style="color:var(--accent); font-weight:600;">已连接 1 台设备</span></div><div style="display:flex; gap:8px; margin-top:8px;">' + spBtn('刷新二维码') + spBtn('复制链接') + '</div></div></div>') +
+      spSec('账号与安全',
+        spRow('用户名', 'WebUI 登录用户名', spVal('admin') + ' ' + spBtn('修改')) +
+        spRow('访问密码', '远程访问密码', spVal('已设置') + ' ' + spBtn('重置密码')) +
+        spRow('自动锁定', '无操作 10 分钟后自动锁定', spToggle(true))) +
+      spSec('频道接入',
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">🤖</span><div><div class="sp-row-label">Telegram Bot</div><div class="sp-row-desc">通过 Telegram 机器人对话</div></div></div><div class="sp-row-right"><span style="font-size:10px; color:var(--accent); margin-right:6px;">● 已连接</span>' + spToggle(true) + spBtn('配置') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">🐦</span><div><div class="sp-row-label">飞书</div><div class="sp-row-desc">接入飞书机器人</div></div></div><div class="sp-row-right">' + spToggle(false) + spBtn('配置') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">💬</span><div><div class="sp-row-label">钉钉</div><div class="sp-row-desc">接入钉钉机器人</div></div></div><div class="sp-row-right">' + spToggle(false) + spBtn('配置') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">💚</span><div><div class="sp-row-label">微信</div><div class="sp-row-desc">扫码登录个人微信</div></div></div><div class="sp-row-right">' + spToggle(false) + spBtn('配置') + '</div></div>' +
+        '<div class="sp-row"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">🏢</span><div><div class="sp-row-label">企业微信</div><div class="sp-row-desc">接入企业微信应用</div></div></div><div class="sp-row-right">' + spToggle(false) + spBtn('配置') + '</div></div>');
+    },
+    '桌面宠物': function() {
+      return spSec('桌面宠物',
+        spRow('显示桌面宠物', '在桌面显示一个可交互的小助手', spToggle(false)) +
+        spRow('宠物尺寸', '宠物窗口大小', spSel(['小 (200px)','中 (280px)','大 (360px)'], '中 (280px)')) +
+        spRow('勿扰模式', '开启后宠物保持静止，不播放动画', spToggle(false)) +
+        spRow('始终置顶', '宠物窗口保持在最上层', spToggle(true)) +
+        spRow('消息通知', '有新消息时宠物播放提示动画', spToggle(true)) +
+        spRow('在宠物上显示授权弹窗', '操作确认弹窗显示在宠物窗口而非主窗口', spToggle(false)));
+    },
+    '系统设置': function() {
+      return spSec('通用',
+        spRow('开机自启动', '系统登录时自动启动 AionUi', spToggle(true)) +
+        spRow('语言', '界面显示语言', spSel(['简体中文','繁體中文','English','日本語','한국어'], '简体中文')) +
+        spRow('关闭窗口时', '点击关闭按钮的行为', spSel(['最小化到托盘','退出应用'], '退出应用'))) +
+      spSec('通知',
+        spRow('任务完成通知', '会话任务完成时发送系统通知', spToggle(true)) +
+        spRow('定时任务完成通知', '定时任务执行完毕后通知', spToggle(true))) +
+      spSec('超时与性能',
+        spRow('LLM 提示超时', '单次 LLM 请求的最大等待时间', '<input class="sp-select" style="width:80px;" type="number" value="300" min="30" max="3600"> <span class="sp-value">秒</span>') +
+        spRow('Agent 空闲超时', '无活动时自动终止 Agent 进程', '<input class="sp-select" style="width:80px;" type="number" value="5" min="1" max="60"> <span class="sp-value">分钟</span>') +
+        spRow('保存上传文件到工作空间', '上传的文件保存到当前工作空间而非缓存目录', spToggle(false)) +
+        spRow('自动预览 Office 文件', '生成的 Word / Excel / PPT 文件自动打开预览', spToggle(true))) +
+      spSec('数据与存储',
+        spRow('缓存目录', '~/Library/Caches/AionUi', spBtn('打开') + spBtn('修改')) +
+        spRow('工作目录', '~/Documents/AionUi', spBtn('打开') + spBtn('修改')) +
+        spRow('日志目录', '~/Library/Logs/AionUi', spBtn('打开')) +
+        spRow('导出数据', '导出所有会话和配置', spBtn('导出')) +
+        spRow('清除缓存', '清除临时文件和缓存，当前占用 128 MB', '<div class="sp-btn" style="color:#C62828; border-color:#FFCDD2;">清除</div>'));
+    },
+    '关于': function() {
+      return '<div class="sp-section" style="text-align:center; padding-top:40px;">' +
+        '<div style="font-size:48px; margin-bottom:12px;">✦</div>' +
+        '<div style="font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">AionUi</div>' +
+        '<div style="font-size:13px; color:var(--text-muted); margin-bottom:24px;">版本 1.9.20</div></div>' +
+      spSec('版本信息',
+        spRow('当前版本', '', spVal('1.9.20') + ' ' + spBtn('检查更新', 'primary')) +
+        spRow('包含预发布版本', '更新时包含 Beta / Dev 版本', spToggle(false)) +
+        spRow('Electron', '', spVal('v35.0.0')) +
+        spRow('Bun', '', spVal('v1.2.15')) +
+        spRow('许可协议', '', spVal('Apache-2.0'))) +
+      spSec('诊断',
+        spRow('系统健康检查', '检测各组件运行状态', spBtn('运行检查', 'primary') + ' ' + spBtn('清除状态'))) +
+      spSec('帮助与反馈',
+        spRow('帮助文档', '查看使用说明和教程', spBtn('打开文档')) +
+        spRow('Bug 反馈', '报告问题（含模块选择、截图上传）', spBtn('提交反馈')) +
+        spRow('官方网站', 'aionui.com', spBtn('访问'))) +
+      '<div style="text-align:center; margin-top:20px; font-size:11px; color:var(--text-muted);">© 2025-2026 AionUi · aionui.com</div>';
+    }
+  };
+
+  function showSettingsPage(name) {
+    var render = SETTINGS_PAGES[name];
+    if (!render) { menuAlert(name)(); return; }
+    document.getElementById('sp-title').textContent = name;
+    document.getElementById('sp-body').innerHTML = render();
+
+    // Highlight active settings item in sidebar
+    document.querySelectorAll('#panel-settings .conv-item').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelectorAll('#panel-settings .conv-item').forEach(function(el) {
+      var label = el.querySelector('.c-label');
+      if (label && label.textContent.trim() === name) el.classList.add('active');
+    });
+
+    showView('settings');
+    tabLastView['settings'] = { restoreFn: function() { showSettingsPage(name); } };
   }
 
   /* ---- Members popup ---- */
@@ -3340,8 +4226,8 @@
     return null;
   }
 
-  // Click conv-item → chat or group view (skip new-message-row, handled by onclick)
-  document.querySelectorAll('.conv-item:not(.new-message-row)').forEach(el => {
+  // Click conv-item → chat or group view (only for chat/people panels)
+  document.querySelectorAll('#panel-chat .conv-item, #panel-people .conv-item').forEach(el => {
     el.addEventListener('click', function(e) {
       if (e.target.closest('.act-btn')) return;
       document.querySelectorAll('.conv-item.active').forEach(c => c.classList.remove('active'));
@@ -3380,7 +4266,7 @@
   /* ---- Initialize default tab selections ---- */
   (function initTabDefaults() {
     // Chat tab: select "首页改版讨论" (first conv-item in panel-chat)
-    var chatConv = document.querySelector('#panel-chat .conv-item:not(.new-message-row)');
+    var chatConv = document.querySelector('#panel-chat .conv-item');
     if (chatConv) {
       var chatViewName = isGroupConv(chatConv) ? 'group' : 'chat';
       tabLastView['chat'] = { restoreFn: function() {
@@ -3390,22 +4276,14 @@
         showView(chatViewName);
       }};
     }
-    // People tab: select "帮我规划下周工作" (first pconv under AionCLI)
-    var aionCLI = document.querySelector('#panel-people .person-item');
-    var aionConvs = aionCLI ? aionCLI.nextElementSibling : null;
-    if (aionConvs && aionConvs.classList.contains('person-convs')) {
-      var firstPconv = aionConvs.querySelector('.pconv');
-      if (firstPconv) {
-        var pViewName = isGroupPconv(firstPconv) ? 'group' : 'chat';
-        tabLastView['people'] = { restoreFn: function() {
-          document.querySelectorAll('.conv-item.active').forEach(c => c.classList.remove('active'));
-          document.querySelectorAll('.pconv.active').forEach(p => p.classList.remove('active'));
-          aionConvs.style.display = 'block';
-          firstPconv.classList.add('active');
-          showView(pViewName);
-        }};
-      }
-    }
+    // People tab: default to AionCLI landing
+    tabLastView['people'] = { restoreFn: function() {
+      selectPersonByName('AionCLI');
+      showAssistantLanding('AionCLI');
+    }};
+    // On load: select AionCLI and show its landing
+    selectPersonByName('AionCLI');
+    showAssistantLanding('AionCLI');
   })();
 
   /* Stop all act-btn clicks from bubbling to parent toggles */
@@ -3426,8 +4304,9 @@
         ]);
       } else {
         const person = btn.closest('.person-item');
-        const pname = person ? person.querySelector('.p-name').textContent : '';
-        alert('为「' + pname + '」新建会话');
+        const pnameEl = person ? person.querySelector('.p-name') : null;
+        const pname = pnameEl ? pnameEl.childNodes[0].textContent.trim() : '';
+        if (pname) showAssistantLanding(pname);
       }
       return;
     }
