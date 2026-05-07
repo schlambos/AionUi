@@ -20,6 +20,7 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/cookie": "^1.0.0",
     "@types/node": "^22.10.2",
+    "@types/serve-handler": "^6.1.4",
     "vitest": "^4.1.0"
   }
 }
