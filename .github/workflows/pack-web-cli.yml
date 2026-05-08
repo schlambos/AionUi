@@ -1,9 +1,22 @@
 name: Pack Web CLI
 
 on:
-  push:
-    branches: [feat/m8-web-cli-tarball]
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Git ref to checkout (leave empty to use the triggering commit)'
+        type: string
+        default: ''
+      append_commit_hash:
+        description: 'Append short commit hash to artifact names'
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref to checkout (leave empty to use the triggering commit)'
+        type: string
+        default: ''
 
 env:
   BUN_INSTALL_REGISTRY: 'https://registry.npmjs.org/'
@@ -25,6 +38,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Get commit hash
+        id: commit
+        shell: bash
+        run: |
+          SHORT=$(git rev-parse --short HEAD)
+          echo "short=$SHORT" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -61,7 +83,7 @@ jobs:
       - name: Upload tarball artifact
         uses: actions/upload-artifact@v6
         with:
-          name: web-cli-${{ matrix.platform }}-${{ matrix.arch }}
+          name: ${{ inputs.append_commit_hash && format('web-cli-{0}-{1}-{2}', matrix.platform, matrix.arch, steps.commit.outputs.short) || format('web-cli-{0}-{1}', matrix.platform, matrix.arch) }}
           path: |
             dist-web-cli/*.tar.gz
             dist-web-cli/*.sha256
@@ -75,6 +97,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Get commit hash
+        id: commit
+        shell: bash
+        run: |
+          SHORT=$(git rev-parse --short HEAD)
+          echo "short=$SHORT" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -96,7 +127,7 @@ jobs:
       - name: Upload install-web.sh artifact
         uses: actions/upload-artifact@v6
         with:
-          name: install-web-script
+          name: ${{ inputs.append_commit_hash && format('install-web-script-{0}', steps.commit.outputs.short) || 'install-web-script' }}
           path: dist-scripts/install-web.sh
           retention-days: 7
 
