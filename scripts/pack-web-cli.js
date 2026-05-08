@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 const { prepareAionuiBackend } = require('../packages/shared-scripts/src/prepare-aionui-backend.js');
 // prepareBundledBun retired: backend now ships its own bun runtime.
@@ -85,13 +86,13 @@ execSync(`tar -czf ${path.basename(tarballPath)} -C ${stagingDir} aionui-web`, {
 
 console.log(`✅ Tarball created: ${tarballPath}`);
 
-// 7. Generate SHA256 checksum
+// 7. Generate SHA256 checksum (cross-platform: use Node's crypto, not `shasum`)
 const checksumPath = `${tarballPath}.sha256`;
-const checksum = execSync(`shasum -a 256 ${path.basename(tarballPath)}`, {
-  cwd: path.dirname(tarballPath),
-  encoding: 'utf8',
-});
-fs.writeFileSync(checksumPath, checksum);
+const hash = crypto.createHash('sha256');
+hash.update(fs.readFileSync(tarballPath));
+const digest = hash.digest('hex');
+// Match shasum format: "<hash>  <filename>\n"
+fs.writeFileSync(checksumPath, `${digest}  ${path.basename(tarballPath)}\n`);
 console.log(`✅ Checksum created: ${checksumPath}`);
 
 console.log('Done!');
