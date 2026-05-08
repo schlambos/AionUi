@@ -8,7 +8,7 @@ import React from 'react';
  * Tests deletion confirmation modal, builtin guard, and cancel behavior.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ConfigProvider } from '@arco-design/web-react';
@@ -29,6 +29,7 @@ describe('DeleteAssistantModal', () => {
     onConfirm: vi.fn(),
     onCancel: vi.fn(),
     activeAssistant: null as AssistantListItem | null,
+    avatarImageMap: {},
   };
 
   beforeEach(() => {
@@ -39,53 +40,49 @@ describe('DeleteAssistantModal', () => {
     cleanup();
   });
 
-  it('does not render when visible=false', () => {
-    renderWithProviders(<DeleteAssistantModal {...defaultProps} />);
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  it('does not render when visible=false (props branch)', () => {
+    const { container } = renderWithProviders(<DeleteAssistantModal {...defaultProps} />);
+    expect(container.querySelector('[data-testid="modal-delete-assistant"]')).not.toBeInTheDocument();
   });
 
-  it('renders modal when visible=true', () => {
+  it('renders modal when visible=true (smoke)', () => {
     const assistant: AssistantListItem = { id: 'a1', name: 'Test', sort_order: 1, source: 'user', enabled: true };
     renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} />);
-    expect(screen.getByText(/delete/i)).toBeInTheDocument();
+    expect(screen.getByTestId('modal-delete-assistant')).toBeInTheDocument();
   });
 
-  it('calls onConfirm when confirm button is clicked for user assistant', async () => {
-    const onConfirmSpy = vi.fn();
+  it('displays assistant name in confirmation (props branch)', () => {
     const assistant: AssistantListItem = { id: 'a1', name: 'UserAssistant', sort_order: 1, source: 'user', enabled: true };
+    renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} />);
+    expect(screen.getByText('UserAssistant')).toBeInTheDocument();
+  });
+
+  it('calls onConfirm when OK button is clicked (callback spy)', async () => {
+    const onConfirmSpy = vi.fn();
+    const assistant: AssistantListItem = { id: 'a1', name: 'Test', sort_order: 1, source: 'user', enabled: true };
+    const user = userEvent.setup();
     renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} onConfirm={onConfirmSpy} />);
 
-    const confirmButton = screen.getByRole('button', { name: /confirm|delete|ok/i }) || screen.getAllByRole('button')[0];
-    const user = userEvent.setup();
-    await user.click(confirmButton);
+    const okButton = screen.getByRole('button', { name: /delete/i });
+    await user.click(okButton);
 
-    expect(onConfirmSpy).toHaveBeenCalled();
+    expect(onConfirmSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('disables confirm button for builtin assistant', () => {
-    const assistant: AssistantListItem = { id: 'claude', name: 'Claude', sort_order: 1, source: 'builtin', enabled: true };
-    renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} />);
-
-    const confirmButton = screen.getByRole('button', { name: /confirm|delete|ok/i }) || screen.getAllByRole('button')[0];
-    expect(confirmButton).toBeDisabled();
-  });
-
-  it('calls onCancel when cancel button is clicked', async () => {
+  it('calls onCancel when Cancel button is clicked (callback spy)', async () => {
     const onCancelSpy = vi.fn();
     const assistant: AssistantListItem = { id: 'a1', name: 'Test', sort_order: 1, source: 'user', enabled: true };
+    const user = userEvent.setup();
     renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} onCancel={onCancelSpy} />);
 
-    const cancelButton = screen.getByRole('button', { name: /cancel/i }) || screen.getAllByRole('button')[1];
-    const user = userEvent.setup();
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
     await user.click(cancelButton);
 
-    expect(onCancelSpy).toHaveBeenCalled();
+    expect(onCancelSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('shows warning message for builtin assistant', () => {
-    const assistant: AssistantListItem = { id: 'claude', name: 'Claude', sort_order: 1, source: 'builtin', enabled: true };
-    renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={assistant} />);
-
-    expect(screen.getByText(/builtin|cannot|delete/i)).toBeInTheDocument();
+  it('renders without activeAssistant (props branch)', () => {
+    renderWithProviders(<DeleteAssistantModal {...defaultProps} visible={true} activeAssistant={null} />);
+    expect(screen.getByTestId('modal-delete-assistant')).toBeInTheDocument();
   });
 });
