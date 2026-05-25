@@ -68,22 +68,10 @@ export const useAutoPreviewOfficeFiles = (
         : file_name;
       const conversationId = conversation?.conversation_id;
 
-      console.log('[useAutoPreviewOfficeFiles] scheduling auto-open', {
-        file_path,
-        contentType,
-        delay: OFFICE_OPEN_DELAY_MS,
-      });
       const timer = setTimeout(() => {
         openTimersRef.current.delete(normalizedFilePath);
 
         if (!findPreviewTab(contentType, '', { file_path, file_name })) {
-          console.log('[useAutoPreviewOfficeFiles] auto-opening preview', {
-            file_path,
-            file_name,
-            workspace,
-            relativePath,
-            conversationId,
-          });
           openPreview('', contentType, {
             file_path,
             file_name,
@@ -93,8 +81,6 @@ export const useAutoPreviewOfficeFiles = (
             conversationId,
             editable: false,
           });
-        } else {
-          console.log('[useAutoPreviewOfficeFiles] tab already exists, skipping', { file_path });
         }
       }, OFFICE_OPEN_DELAY_MS);
 
@@ -132,13 +118,11 @@ export const useAutoPreviewOfficeFiles = (
 
     const unsubscribeFileAdded = ipcBridge.workspaceOfficeWatch.fileAdded.on((event) => {
       try {
-        console.log('[useAutoPreviewOfficeFiles] fileAdded event received', event);
         const normalizedEventWorkspace = normalizeWatchPath(event.workspace);
         if (normalizedEventWorkspace !== normalizedWorkspace) return;
 
         const normalizedFilePath = normalizeWatchPath(event.file_path);
         if (knownOfficeFilesRef.current.has(normalizedFilePath)) {
-          console.log('[useAutoPreviewOfficeFiles] file already known, skipping', normalizedFilePath);
           return;
         }
 
